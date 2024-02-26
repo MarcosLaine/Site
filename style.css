@@ -1,4 +1,4 @@
-/* Correções gerais de estilo */
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -14,7 +14,7 @@ header {
 }
 
 header h1, header h2 {
-    margin: 0; 
+    margin: 0;
 }
 
 .social-icons {
@@ -50,9 +50,9 @@ footer {
 /* Carrossel */
 .carousel {
     position: relative;
-    max-width: 500px; /* ou a largura que você achar mais apropriada */
-    height: 300px; /* altura fixa para o carrossel */
-    margin: 20px auto; /* centraliza na página com uma margem superior */
+    max-width: 500px;
+    height: 300px;
+    margin: 20px auto;
     overflow: hidden;
 }
 
@@ -74,8 +74,6 @@ footer {
     opacity: 1;
 }
 
-
-/* Botões de navegação do carrossel */
 .carousel-button {
     position: absolute;
     top: 50%;
@@ -86,7 +84,7 @@ footer {
     cursor: pointer;
     padding: 10px;
     z-index: 100;
-    border-radius: 50%; /* botões circulares */
+    border-radius: 50%;
 }
 
 .prev-button {
@@ -97,8 +95,6 @@ footer {
     right: 10px;
 }
 
-
-
 /* Container para as seções Conhecimentos e Skills */
 .skills-conhecimentos-container {
     display: flex;
@@ -106,33 +102,57 @@ footer {
     margin-bottom: 2rem;
 }
 
-/* Conhecimentos e Skills compartilharão igualmente o espaço disponível */
 .conhecimentos, .skills {
     flex: 1;
     padding: 1rem;
 }
 
-/* Container para as listas dentro de Skills, dividindo em duas colunas */
 .skills-list-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-/* Cada coluna dentro de Skills terá metade do espaço */
 .column {
-    width: 48%; /* Ajustando para menos de 50% para considerar a margem/padding */
+    width: 48%;
     margin-bottom: 1rem;
 }
 
-/* Estilo das listas para remover a identação padrão */
 ul {
     list-style: none;
     padding: 0;
 }
 
-/* Estilo dos itens da lista */
 li {
     margin-bottom: 0.5rem;
 }
 
+/* Media Queries */
+@media (max-width: 768px) {
+    .skills-conhecimentos-container {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .carousel {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1, header h2 {
+        font-size: 1.2em;
+    }
+
+    .social-icons img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .carousel {
+        height: 150px;
+    }
+}

@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcos Laine</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .skills-list-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .skills-list-container li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .skills-list-container li img {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,10 +36,10 @@
                 explorando meu interesse e entusiasmo por tecnologia e programação com uma vontade incomparável de
                 aprender. Possuo conhecimentos sólidos em fundamentos da computação, algoritmos e programação básica,
                 visto que estou no 3° (terceiro) período do curso. Meu objetivo é expandir esse conhecimento, aprimorar
-                minhas
-                habilidades de desenvolvimento de software e contribuir para projetos inovadores. Estou em busca
-                de oportunidades de estágio ou emprego que me permitam aplicar meus conhecimentos teóricos na prática,
-                enquanto continuo aprendendo e me desenvolvendo profissionalmente.</p>
+                minhas habilidades de desenvolvimento de software e contribuir para projetos inovadores. Atualmente estou
+                estagiando na empresa <a class="link" href="https://dtidigital.com.br"><img src="https://www.cms.dtidigital.com.br/wp-content/uploads/2019/12/logo-dti-preta.png" alt="DTI Icon" width="20"><b>
+                DTI Digital</b></a>, o que me permite aplicar meus conhecimentos teóricos na prática,
+                enquanto continuo aprendendo e me desenvolvendo profissionalmente. Atualmente trabalho com a tecnologia .NET, utulizando C#!</p>
         </section>
         <section>
             <h3>Projetos</h3>
@@ -35,6 +51,8 @@
                     <img src="financiart.png" alt="Projeto 1" class="carousel-image active">
                     <img src="memoria.png" alt="Projeto 2" class="carousel-image">
                     <img src="tictactoe.png" alt="Projeto 3" class="carousel-image">
+                    <img src="Lembretes.png" alt="Projeto 4" class="carousel-image">
+                    <img src="Poker.png" alt="Projeto 5" class="carousel-image">
                 </div>
                 <button class="carousel-button prev-button">&lt;</button>
                 <button class="carousel-button next-button">&gt;</button>
@@ -50,15 +68,19 @@
         prevButton.addEventListener('click', () => {
             if (currentIndex > 0) {
                 currentIndex--;
-                updateCarousel();
+            } else {
+                currentIndex = carouselContainer.children.length - 1;
             }
+            updateCarousel();
         });
 
         nextButton.addEventListener('click', () => {
             if (currentIndex < carouselContainer.children.length - 1) {
                 currentIndex++;
-                updateCarousel();
+            } else {
+                currentIndex = 0;
             }
+            updateCarousel();
         });
 
         function updateCarousel() {
@@ -79,6 +101,7 @@
                 <li>Back-end</li>
                 <li>Banco de Dados</li>
                 <li>Engenharia de software</li>
+                <li>Metodologias Ágeis</li>
             </ul>
         </section>
         <section class="skills">
@@ -86,18 +109,20 @@
             <div class="skills-list-container">
                 <div class="column">
                     <ul>
-                        <li>Java</li>
-                        <li>Python</li>
-                        <li>HTML, CSS & JavaScript</li>
-                        <li>C++, C & C#</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/java_original_logo_icon_146458.png" alt="Java Icon" width="20"> Java</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/112/PNG/512/python_18894.png" alt="Python Icon" width="20"> Python</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_html_icon_130541.png" alt="HTML Icon" width="20"> HTML, CSS & JavaScript</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/3389/PNG/512/c_sharp_icon_213045.png" alt="C# Icon" width="20"> C#</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/3398/PNG/512/plus_logo_c_icon_214621.png" alt="C Icon" width="20"> C++ & C</li>
                     </ul>
                 </div>
                 <div class="column">
                     <ul>
-                        <li>PostgreSQL</li>
-                        <li>Git e GitHub</li>
-                        <li>Linux</li>
-                        <li>Estudando React.js</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/postgresql_plain_wordmark_logo_icon_146390.png" alt="PostgreSQL Icon" width="20"> PostgreSQL</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/git_original_wordmark_logo_icon_146510.png" alt="Git Icon" width="20"> Git e GitHub</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/linux_original_logo_icon_146433.png" alt="Linux Icon" width="20"> Linux</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/react_original_logo_icon_146374.png" alt="React Icon" width="20"> React.js</li>
+                        <li><img src="https://cdn.icon-icons.com/icons2/3914/PNG/512/dotnet_logo_icon_249007.png" alt=".NET Icon" width="20"> .NET</li>
                     </ul>
                 </div>
             </div>
@@ -107,9 +132,9 @@
     <footer>
         <h3>Contate-me</h3>
         <div class="social-icons">
-            <a href="https://github.com/marcoslaine" target="_blank"><img src="GitHub.png" alt="GitHub"></a>
-            <a href="https://www.linkedin.com/in/marcos-laine" target="_blank"><img src="Linkedin.png" alt="LinkedIn"></a>
-            <a href="mailto:marcospslaine@gmail.com" target="_blank"><img src="Gmail_2020.png" alt="Gmail"></a>
+            <a href="https://github.com/marcoslaine" target="_blank"><img src="Github.png" alt="GitHub" width="30"></a>
+            <a href="https://www.linkedin.com/in/marcos-laine" target="_blank"><img src="Linkedin.png" alt="LinkedIn" width="30"></a>
+            <a href="mailto:marcospslaine@gmail.com" target="_blank"><img src="Gmail_2020.png" alt="Gmail" width="30"></a>
         </div>
         <p>&copy; 2024 Marcos Laine. Todos direitos reservados.</p>
     </footer>

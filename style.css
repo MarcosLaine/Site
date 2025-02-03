@@ -4,77 +4,136 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-}
-
-header {
+  }
+  
+  header {
     background-color: #333;
     color: white;
     padding: 20px;
     text-align: center;
-}
-
-header h1, header h2 {
+  }
+  
+  header h1,
+  header h2 {
     margin: 0;
-}
-
-.social-icons {
+  }
+  
+  .social-icons {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-}
-
-.social-icons a {
+  }
+  
+  .social-icons a {
     margin: 0 10px;
-}
-
-.social-icons img {
+  }
+  
+  .social-icons img {
     width: 30px;
     height: 30px;
     filter: grayscale(100%);
-}
-
-main {
+  }
+  
+  main {
     padding: 20px;
-}
-
-main section {
+  }
+  
+  main section {
     margin-bottom: 20px;
-}
-
-footer {
+  }
+  
+  footer {
     background-color: #f4f4f4;
     padding: 20px;
     text-align: center;
-}
-
-/* Carrossel */
-.carousel {
+  }
+  
+  /* ========= CARROSSEL (Imagens com fundo borrado e descrição fixa) ========= */
+  
+  /* Contêiner do carrossel com aspect-ratio para manter tamanho consistente */
+  .carousel,
+  .carousel2 {
     position: relative;
     max-width: 500px;
-    height: 300px;
+    width: 100%;
     margin: 20px auto;
     overflow: hidden;
-}
-
-.carousel-container {
+    aspect-ratio: 5 / 3;
+  }
+  
+  /* Contêiner dos slides ocupa todo o carrossel */
+  .carousel-container,
+  .carousel-container2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     transition: transform 0.3s ease;
-}
-
-.carousel-image {
+  }
+  
+  /* Cada slide: container da imagem, fundo borrado e descrição */
+  .carousel-image-container,
+  .carousel-image2-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+  }
+  
+  /* Imagem de fundo borrada */
+  .bg-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(8px);
+    transform: scale(1.1);
+    z-index: 0;
+  }
+  
+  /* Imagem principal: sempre visível; adicionamos position: relative para que o z-index funcione */
+  .carousel-image,
+  .carousel-image2 {
+    position: relative;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    flex-shrink: 0;
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
-}
-
-.carousel-image.active {
+    transition: opacity 0.5s ease, filter 0.5s ease;
+    z-index: 1;
+    opacity: 1 !important;
+  }
+  
+  /* (Opcional) Se desejar manter efeito de escurecimento no hover sem ocultar a imagem, mantenha a regra abaixo */
+  /*
+  .carousel-image-container:hover .carousel-image,
+  .carousel-image2-container:hover .carousel-image2 {
+    filter: brightness(0.7);
+  }
+  */
+  
+  /* Overlay de descrição: sempre visível */
+  .carousel-description,
+  .carousel2-description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
     opacity: 1;
-}
-
-.carousel-button {
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+  }
+  
+  /* Botões de navegação */
+  .carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -85,78 +144,82 @@ footer {
     padding: 10px;
     z-index: 100;
     border-radius: 50%;
-}
-
-.prev-button {
+  }
+  
+  .prev-button {
     left: 10px;
-}
-
-.next-button {
+  }
+  
+  .next-button {
     right: 10px;
-}
-
-/* Container para as seções Conhecimentos e Skills */
-.skills-conhecimentos-container {
+  }
+  
+  .carousel-button.prev-button2 {
+    left: 10px;
+  }
+  
+  .carousel-button.next-button2 {
+    right: 10px;
+  }
+  
+  /* ========= OUTROS ESTILOS (Skills e Conhecimentos) ========= */
+  
+  .skills-conhecimentos-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
-}
-
-.conhecimentos, .skills {
+  }
+  
+  .conhecimentos,
+  .skills {
     flex: 1;
     padding: 1rem;
-}
-
-.skills-list-container {
+  }
+  
+  .skills-list-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-}
-
-.column {
+  }
+  
+  .column {
     width: 48%;
     margin-bottom: 1rem;
-}
-
-ul {
+  }
+  
+  ul {
     list-style: none;
     padding: 0;
-}
-
-li {
+  }
+  
+  li {
     margin-bottom: 0.5rem;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
+  }
+  
+  /* ========= MEDIA QUERIES ========= */
+  
+  @media (max-width: 768px) {
     .skills-conhecimentos-container {
-        flex-direction: column;
+      flex-direction: column;
     }
-
     .column {
-        width: 100%;
+      width: 100%;
     }
-
-    .carousel {
-        height: 200px;
+  }
+  
+  @media (max-width: 480px) {
+    header h1,
+    header h2 {
+      font-size: 1.2em;
     }
-}
-
-@media (max-width: 480px) {
-    header h1, header h2 {
-        font-size: 1.2em;
-    }
-
     .social-icons img {
-        width: 24px;
-        height: 24px;
+      width: 24px;
+      height: 24px;
     }
-
-    .carousel {
-        height: 150px;
-    }
-}
-
-.link{
+  }
+  
+  /* Link sem sublinhado */
+  .link {
     text-decoration: none;
-}
+  }
+  

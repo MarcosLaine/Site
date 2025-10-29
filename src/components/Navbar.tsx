@@ -22,11 +22,11 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
         theme === 'dark' ? 'glass' : 'glass-light'
       } shadow-lg`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <nav className="container mx-auto px-3 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           <motion.a
             href="#top"
-            className="text-2xl font-bold"
+            className="text-xl sm:text-2xl font-bold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -36,7 +36,7 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
             <span className="text-gradient">Laine</span>
           </motion.a>
 
-          <div className="flex items-center gap-3 sm:gap-6">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <div className="hidden md:flex items-center gap-4">
               {['about', 'projects', 'skills', 'contact'].map((item) => (
                 <motion.a
@@ -57,7 +57,7 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
 
             <motion.button
               onClick={toggleLanguage}
-              className={`px-3 py-2 rounded-lg border transition-colors ${
+              className={`px-2 sm:px-3 py-2 text-sm sm:text-base rounded-lg border transition-colors ${
                 theme === 'dark'
                   ? 'border-white/20 hover:bg-white/10'
                   : 'border-slate-300 hover:bg-slate-200/50'
@@ -66,12 +66,12 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle language"
             >
-              🌐 {language.toUpperCase()}
+              <span className="hidden xs:inline">🌐 </span>{language.toUpperCase()}
             </motion.button>
 
             <motion.button
               onClick={toggleTheme}
-              className={`px-3 py-2 rounded-lg border transition-colors ${
+              className={`px-2 sm:px-3 py-2 rounded-lg border transition-colors ${
                 theme === 'dark'
                   ? 'border-white/20 hover:bg-white/10'
                   : 'border-slate-300 hover:bg-slate-200/50'
@@ -86,11 +86,11 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
             <motion.a
               href="/docs/Marcos_Laine_QA.pdf"
               download
-              className="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow"
+              className="hidden xs:flex px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              📄 {t('nav.downloadCV')}
+              📄 <span className="hidden sm:inline ml-1">{t('nav.downloadCV')}</span>
             </motion.a>
           </div>
         </div>

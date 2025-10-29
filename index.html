@@ -1,280 +1,258 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marcos Laine</title>
+  <title>Marcos Laine • Portfólio</title>
+  <meta name="description" content="Portfólio de Marcos Laine, estudante de Ciência da Computação e QA.">
+  <link rel="icon" href="img/icon/Logo-Marcos.png" type="image/png">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="img/icon/Logo-Marcos.png" type="image/x-icon">
-  <style>
-    /* Estilos internos para listas (Skills e Conhecimentos) */
-    .skills-list-container ul,
-    .conhecimentos-list-container ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    .skills-list-container li,
-    .conhecimentos-list-container li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .skills-list-container li img,
-    .conhecimentos-list-container li img {
-      margin-right: 10px;
-    }
-    .skills-list-container,
-    .conhecimentos-list-container {
-      display: flex;
-    }
-    .skills-list-container .column,
-    .conhecimentos-list-container .column {
-      flex: 1;
-    }
-  </style>
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Marcos Laine</h1>
-    <h2>Estudante de Ciência da Computação</h2>
+  <!-- Barra de navegação -->
+  <header class="nav">
+    <div class="container nav__content">
+      <a class="brand" href="#top">Marcos<span>Laine</span></a>
+      <nav class="menu" aria-label="Navegação principal">
+        <a href="#about" class="menu__item" data-i18n="nav.about">Sobre</a>
+        <a href="#projects" class="menu__item" data-i18n="nav.projects">Projetos</a>
+        <a href="#skills" class="menu__item" data-i18n="nav.skills">Skills</a>
+        <a href="#contact" class="menu__item" data-i18n="nav.contact">Contato</a>
+        <button id="langToggle" class="btn btn--ghost" aria-label="Alternar idioma">🌐</button>
+        <button id="themeToggle" class="btn btn--ghost" aria-label="Alternar tema">🌓</button>
+      </nav>
+    </div>
   </header>
+
+  <!-- Hero -->
+  <section id="top" class="hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <h1><span data-i18n="hero.greeting">Olá, me chamo Marcos Laine</span></h1>
+        <p class="subtitle" data-i18n="hero.subtitle">Estudante de Ciência da Computação • Quality Assurance (QA)</p>
+        <p class="muted" data-i18n="hero.description">
+          Atualmente QA Lead atuando na <b>DTI Digital</b>, alocado na <b>ADI Global</b>, aplicando testes manuais implementando automações de front-end mobile.
+        </p>
+        <div class="hero__cta">
+          <a class="btn" href="#projects" data-i18n="hero.viewProjects">Ver projetos</a>
+          <a class="btn btn--ghost" href="mailto:marcospslaine@gmail.com" data-i18n="hero.contact">Fale comigo</a>
+        </div>
+      </div>
+      <div class="hero__logo">
+        <img src="img/about_me/Profile-photo.jpeg" alt="Logo Marcos Laine">
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
   <main>
-    <section>
-      <h3>Sobre Mim</h3>
-      <p>
-        Me chamo Marcos Paulo Laine e busco desenvolver minha carreira na área da Ciência da Computação,
-        explorando meu interesse e entusiasmo por tecnologia e programação com uma vontade incomparável de aprender.
-        Possuo conhecimentos sólidos em fundamentos da computação, algoritmos e programação básica, visto que estou no 5º período do curso.
-        Meu objetivo é expandir esse conhecimento, aprimorar minhas habilidades de desenvolvimento de software e contribuir para projetos inovadores.
-        Atualmente estou estagiando na empresa 
-        <a class="link" href="https://dtidigital.com.br">
-          <img src="https://www.cms.dtidigital.com.br/wp-content/uploads/2019/12/logo-dti-preta.png" alt="DTI Icon" width="20">
-          <b>DTI Digital</b>
-        </a>,
-        o que me permite aplicar meus conhecimentos teóricos na prática, enquanto continuo aprendendo e me desenvolvendo profissionalmente.
-        Atualmente trabalho como Quality Assurance (QA), sendo consultor da DTI na empresa norte-americana
-        <a class="link" href="https://www.adiglobal.com">
-          <img src="img/about_me/adi-logo.png" alt="ADI Global" width="35">
-          <b>ADI Global</b>
-        </a>.
-      </p>
-    </section>
-    <section>
-      <h3>Projetos</h3>
-      <p>
-        Realizei projetos como uma página de auxiliar de investimentos, que conta com Front-end, Back-end e
-        Banco de dados básicos; calculadora com interface gráfica em Java e em JavaScript; jogos básicos como
-        Memória e Tic-Tac-Toe utilizando JavaScript, Java, Python, entre outros.
-      </p>
-      <!-- Carrossel 1 -->
-      <div class="carousel">
-        <div class="carousel-container">
-          <!-- Cada slide contém: imagem de fundo borrada, imagem principal (sempre visível) e descrição fixa -->
-          <div class="carousel-image-container">
-            <img src="img/carousel1/Lembretes.png" alt="Projeto 1" class="bg-blur">
-            <img src="img/carousel1/Lembretes.png" alt="Projeto 1" class="carousel-image">
-            <div class="carousel-description">Sistema de Lembretes</div>
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section__title" data-i18n="about.title">Sobre mim</h2>
+        <div class="about">
+          <div class="about__text">
+            <p data-i18n="about.text1">
+              Me chamo <b>Marcos Paulo Laine</b> e estou no 5º período de Ciência da Computação.
+              Busco desenvolver minha carreira em tecnologia com curiosidade, responsabilidade e vontade de aprender.
+            </p>
+            <p data-i18n="about.text2">
+              Na <a class="link" href="https://dtidigital.com.br" target="_blank" rel="noopener">DTI Digital</a> atuo como QA
+              para a empresa norte-americana
+              <a class="link" href="https://www.adiglobal.com" target="_blank" rel="noopener">ADI Global</a>, consolidando
+              práticas de testes manuais, exploração, API e pipelines.
+            </p>
           </div>
-          <div class="carousel-image-container">
-            <img src="img/carousel1/financiart.png" alt="Projeto 2" class="bg-blur">
-            <img src="img/carousel1/financiart.png" alt="Projeto 2" class="carousel-image active">
-            <div class="carousel-description">Auxiliar de Investimentos</div>
-          </div>
-          <div class="carousel-image-container">
-            <img src="img/carousel1/memoria.png" alt="Projeto 3" class="bg-blur">
-            <img src="img/carousel1/memoria.png" alt="Projeto 3" class="carousel-image">
-            <div class="carousel-description">Jogo da Memória</div>
-          </div>
-
-          <div class="carousel-image-container">
-            <img src="img/carousel1/tictactoe.png" alt="Projeto 4" class="bg-blur">
-            <img src="img/carousel1/tictactoe.png" alt="Projeto 4" class="carousel-image">
-            <div class="carousel-description">Tic-Tac-Toe</div>
-          </div>
-
-          <div class="carousel-image-container">
-            <img src="img/carousel1/Poker.png" alt="Projeto 5" class="bg-blur">
-            <img src="img/carousel1/Poker.png" alt="Projeto 5" class="carousel-image">
-            <div class="carousel-description">Jogo de Poker</div>
+          <div class="about__badge">
+            <img src="img/about_me/adi-logo.jpeg" alt="ADI Global" title="ADI Global">
           </div>
         </div>
-        <button class="carousel-button prev-button">&lt;</button>
-        <button class="carousel-button next-button">&gt;</button>
       </div>
     </section>
 
-    <script>
-      // Carrossel 1
-      const prevButton = document.querySelector('.prev-button');
-      const nextButton = document.querySelector('.next-button');
-      const carouselContainer = document.querySelector('.carousel-container');
-      let currentIndex = 0;
+    <!-- Projetos com Carrosséis -->
+    <section id="projects" class="section section--alt">
+      <div class="container">
+        <h2 class="section__title" data-i18n="projects.title">Projetos</h2>
+        <p class="section__lead" data-i18n="projects.lead">
+          Alguns projetos acadêmicos e pessoais — páginas web, jogos simples, ferramentas de investimento e automações.
+        </p>
 
-      prevButton.addEventListener('click', () => {
-        if (currentIndex > 0) {
-          currentIndex--;
-        } else {
-          currentIndex = carouselContainer.children.length - 1;
-        }
-        updateCarousel();
-      });
-
-      nextButton.addEventListener('click', () => {
-        if (currentIndex < carouselContainer.children.length - 1) {
-          currentIndex++;
-        } else {
-          currentIndex = 0;
-        }
-        updateCarousel();
-      });
-
-      function updateCarousel() {
-        const offset = -currentIndex * 100;
-        carouselContainer.style.transform = `translateX(${offset}%)`;
-        const slides = document.querySelectorAll('.carousel-image');
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[currentIndex].classList.add('active');
-      }
-    </script>
-
-    <section>
-      <p>
-        Criei também projetos mais elaborados, como um robô em Python que opera cryptomoedas com base em cálculos de indicadores e tendências,
-        utilizando a API da corretora Binance. Criei também um sistema que envia e-mails e notificações por push com dados de fechamento
-        do mercado, como o preço ao final do dia do IBOVESPA, Nasdaq, S&P500, preço atual do Bitcoin, dentre outros ativos que o usuário desejar, além de enviar um gráfico
-        do ativo escolhido com o desempenho dos últimos 6 meses, usando a API do Pushover e do Gmail, coletando os dados da API do Yahoo Finance.
-        Além disso, criei um sistema de backtesting em Python, que simula a operação do robô em um período definido pelo usuário,
-        para que o desempenho de um determinado ativo possa ser visualizado com uma estratégia escolhida.
-        Todos esses projetos podem ser vistos no carrossel abaixo:
-      </p>
-      <!-- Carrossel 2 -->
-      <div class="carousel carousel2">
-        <div class="carousel-container carousel-container2">
-          <div class="carousel-image2-container">
-            <img src="img/carousel2/Relatório_mercado.png" alt="Projeto 1" class="bg-blur">
-            <img src="img/carousel2/Relatório_mercado.png" alt="Projeto 1" class="carousel-image2 active">
-            <div class="carousel2-description">Relatório do Mercado diário no Email e Celular</div>
+        <!-- Carrossel 1 -->
+        <div class="carousel" data-carousel>
+          <div class="carousel__header">
+            <h3 data-i18n="projects.carousel1.title">Front-end / Jogos / Utilitários</h3>
+            <div class="carousel__controls">
+              <button class="icon-btn" data-prev aria-label="Anterior">‹</button>
+              <button class="icon-btn" data-next aria-label="Próximo">›</button>
+            </div>
           </div>
-          <div class="carousel-image2-container">
-            <img src="img/carousel2/Backtesting.png" alt="Projeto 2" class="bg-blur">
-            <img src="img/carousel2/Backtesting.png" alt="Projeto 2" class="carousel-image2">
-            <div class="carousel2-description">Backtesting de um ativo</div>
+          <div class="carousel__track" data-track>
+            <!-- Slides (usei seus arquivos existentes em img/carousel1) -->
+            <article class="card" aria-label="Lembretes">
+              <div class="card__media">
+                <img src="img/carousel1/Lembretes.png" alt="Projeto Lembretes">
+              </div>
+              <div class="card__body">
+                <h4 data-i18n="projects.lembretes.title">Lembretes</h4>
+                <p data-i18n="projects.lembretes.description">Aplicativo simples para organização de tarefas e lembretes.</p>
+              </div>
+            </article>
+
+            <article class="card" aria-label="Poker">
+              <div class="card__media">
+                <img src="img/carousel1/Poker.png" alt="Projeto Poker">
+              </div>
+              <div class="card__body">
+                <h4 data-i18n="projects.poker.title">Prob. Poker</h4>
+                <p data-i18n="projects.poker.description">Ferramenta didática para análise probabilística de mãos.</p>
+              </div>
+            </article>
+
+            <article class="card" aria-label="Financiart">
+              <div class="card__media">
+                <img src="img/carousel1/financiart.png" alt="Projeto Financiart">
+              </div>
+              <div class="card__body">
+                <h4>Financiart</h4>
+                <p data-i18n="projects.financiart.description">Página auxiliar de investimentos (front, back e BD básicos).</p>
+              </div>
+            </article>
+
+            <article class="card" aria-label="Jogo da Memória">
+              <div class="card__media">
+                <img src="img/carousel1/memoria.png" alt="Jogo da Memória">
+              </div>
+              <div class="card__body">
+                <h4 data-i18n="projects.memoria.title">Memória</h4>
+                <p data-i18n="projects.memoria.description">Jogo clássico implementado para estudos de JS/DOM.</p>
+              </div>
+            </article>
+
+            <article class="card" aria-label="Tic-Tac-Toe">
+              <div class="card__media">
+                <img src="img/carousel1/tictactoe.png" alt="Jogo da Velha">
+              </div>
+              <div class="card__body">
+                <h4>Tic-Tac-Toe</h4>
+                <p data-i18n="projects.tictactoe.description">Implementação do jogo da velha em JavaScript.</p>
+              </div>
+            </article>
           </div>
         </div>
-        <button class="carousel-button prev-button2">&lt;</button>
-        <button class="carousel-button next-button2">&gt;</button>
+
+        <!-- Carrossel 2 -->
+        <div class="carousel" data-carousel>
+          <div class="carousel__header">
+            <h3 data-i18n="projects.carousel2.title">Mercado / Relatórios</h3>
+            <div class="carousel__controls">
+              <button class="icon-btn" data-prev aria-label="Anterior">‹</button>
+              <button class="icon-btn" data-next aria-label="Próximo">›</button>
+            </div>
+          </div>
+          <div class="carousel__track" data-track>
+            <article class="card" aria-label="Backtesting">
+              <div class="card__media">
+                <img src="img/carousel2/Backtesting.png" alt="Backtesting">
+              </div>
+              <div class="card__body">
+                <h4>Backtesting</h4>
+                <p data-i18n="projects.backtesting.description">Protótipos de backtest para estudos de estratégia.</p>
+              </div>
+            </article>
+
+            <article class="card" aria-label="Relatório de Mercado">
+              <div class="card__media">
+                <img src="img/carousel2/Relatório_mercado.png" alt="Relatório de Mercado">
+              </div>
+              <div class="card__body">
+                <h4 data-i18n="projects.market.title">Relatório de Mercado</h4>
+                <p data-i18n="projects.market.description">Geração de relatórios com indicadores selecionados.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <script>
-      // Carrossel 2
-      const prevButton2 = document.querySelector('.prev-button2');
-      const nextButton2 = document.querySelector('.next-button2');
-      const carouselContainer2 = document.querySelector('.carousel-container2');
-      let currentIndex2 = 0;
+    <!-- Skills -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section__title" data-i18n="skills.title">Skills & Ferramentas</h2>
 
-      prevButton2.addEventListener('click', () => {
-        if (currentIndex2 > 0) {
-          currentIndex2--;
-        } else {
-          currentIndex2 = carouselContainer2.children.length - 1;
-        }
-        updateCarousel2();
-      });
-
-      nextButton2.addEventListener('click', () => {
-        if (currentIndex2 < carouselContainer2.children.length - 1) {
-          currentIndex2++;
-        } else {
-          currentIndex2 = 0;
-        }
-        updateCarousel2();
-      });
-
-      function updateCarousel2() {
-        const offset = -currentIndex2 * 100;
-        carouselContainer2.style.transform = `translateX(${offset}%)`;
-        const slides2 = document.querySelectorAll('.carousel-image2');
-        slides2.forEach(slide => slide.classList.remove('active'));
-        slides2[currentIndex2].classList.add('active');
-      }
-    </script>
-
-    <div class="skills-conhecimentos-container">
-      <section class="conhecimentos">
-        <h2>Conhecimentos</h2>
-        <div class="conhecimentos-list-container">
-          <div class="column">
-            <ul>
-              <li><img src="img/knowledge/QA.png" alt="QA Icon" width="20">Quality Assurance (QA)</li>
-              <li><img src="img/knowledge/Api.png" alt="API Icon" width="20">Testes de API</li>
-              <li><img src="img/knowledge/Coding.png" alt="Globe Icon" width="20">Front-end e Back-end</li>
-              <li><img src="img/knowledge/Azure-Pipelines.png" alt="Pipeline Icon" width="20">Pipelines</li>
-              <li><img src="img/knowledge/CyberSecurity.png" alt="Cyber Icon" width="20">Cyber Segurança</li>
-              <li><img src="img/knowledge/ManualTesting.png" alt="Manual Testing Icon" width="20">Testes Manuais</li>
-              <li><img src="img/knowledge/mobileDevelopment.png" alt="Mobile Development Icon" width="20">Desenvolvimento Mobile</li>
-            </ul>
-          </div>
-          <div class="column">
-            <ul>
-              <li><img src="img/knowledge/DataBase.png" alt="DataBase Icon" width="20">Banco de Dados</li>
-              <li><img src="img/knowledge/Internet.png" alt="Code Icon" width="20">Testes de Front-end</li>
-              <li><img src="img/knowledge/Scrum.png" alt="Agile Icon" width="20">Metodologias Ágeis</li>
-              <li><img src="img/knowledge/SoftwareEngineer.png" alt="Software Icon" width="20">Engenharia de Software</li>
-              <li><img src="img/knowledge/Hacker.png" alt="Hacking Icon" width="20">Hacking Ético</li>
-              <li><img src="img/knowledge/Automation.png" alt="Automation Icon" width="20">Testes Automatizados</li>
-              <li><img src="img/knowledge/mobileTest.png" alt="Mobile Testing Icon" width="20">Testes Mobile</li>
-            </ul>
-          </div>
+        <div class="chips">
+          <!-- usa os ícones existentes em img/skills -->
+          <div class="chip"><img src="img/skills/Java.png" alt="Java"><span>Java</span></div>
+          <div class="chip"><img src="img/skills/JavaScript.png" alt="JavaScript"><span>JavaScript</span></div>
+          <div class="chip"><img src="img/skills/Python.png" alt="Python"><span>Python</span></div>
+          <div class="chip"><img src="img/skills/React.png" alt="React"><span>React</span></div>
+          <div class="chip"><img src="img/skills/Flutter.png" alt="Flutter"><span>Flutter</span></div>
+          <div class="chip"><img src="img/skills/Dotnet.png" alt=".NET"><span>.NET</span></div>
+          <div class="chip"><img src="img/skills/Firebase.png" alt="Firebase"><span>Firebase</span></div>
+          <div class="chip"><img src="img/skills/SQL.png" alt="SQL"><span>SQL</span></div>
+          <div class="chip"><img src="img/skills/Linux.png" alt="Linux"><span>Linux</span></div>
+          <div class="chip"><img src="img/skills/Git.png" alt="Git"><span>Git</span></div>
+          <div class="chip"><img src="img/skills/GitHub.png" alt="GitHub"><span>GitHub</span></div>
+          <div class="chip"><img src="img/skills/Postman.png" alt="Postman"><span>Postman</span></div>
+          <div class="chip"><img src="img/skills/Jira.png" alt="Jira"><span>Jira</span></div>
+          <div class="chip"><img src="img/skills/Azure-Devops.png" alt="Azure DevOps"><span>Azure DevOps</span></div>
+          <div class="chip"><img src="img/skills/readyapi.png" alt="ReadyAPI"><span>ReadyAPI</span></div>
+          <div class="chip"><img src="img/skills/maestro.png" alt="Maestro"><span>Maestro</span></div>
+          <div class="chip"><img src="img/skills/CPP.png" alt="C++"><span>C++</span></div>
+          <div class="chip"><img src="img/skills/CSharp.png" alt="C#"><span>C#</span></div>
+          <div class="chip"><img src="img/skills/Dart.png" alt="Dart"><span>Dart</span></div>
         </div>
-      </section>
-      <section class="skills">
-        <h2>Skills</h2>
-        <div class="skills-list-container">
-          <div class="column">
-            <ul>
-              <li><img src="img/skills/Java.png" alt="Java Icon" width="20"> Java</li>
-              <li><img src="img/skills/Python.png" alt="Python Icon" width="20"> Python</li>
-              <li><img src="img/skills/JavaScript.png" alt="HTML Icon" width="20"> HTML, CSS & JavaScript</li>
-              <li><img src="img/skills/CSharp.png" alt="C# Icon" width="20"> C#</li>
-              <li><img src="img/skills/Postman.png" alt="Postman Icon" width="20"> Postman</li>
-              <li><img src="img/skills/CPP.png" alt="C Icon" width="20"> C++ & C</li>
-              <li><img src="img/skills/maestro.png" alt="Maestro Icon" width="20"> Maestro</li>
-              <li><img src="img/skills/Jira.png" alt="Jira Icon" width="20"> Jira</li>
-              <li><img src="img/skills/Dart.png" alt="Dart Icon" width="20"> Dart</li>
-            </ul>
-          </div>
-          <div class="column">
-            <ul>
-              <li><img src="img/skills/SQL.png" alt="PostgreSQL Icon" width="20"> SQL</li>
-              <li><img src="img/skills/Git.png" alt="Git Icon" width="20"> Git e GitHub</li>
-              <li><img src="img/skills/Linux.png" alt="Linux Icon" width="20"> Linux</li>
-              <li><img src="img/skills/Dotnet.png" alt=".NET Icon" width="20"> .NET</li>
-              <li><img src="img/skills/readyapi.png" alt="ReadyAPI Icon" width="20"> ReadyAPI</li>
-              <li><img src="img/skills/React.png" alt="React Icon" width="20"> React.js</li>
-              <li><img src="img/skills/Firebase.png" alt="Firebase Icon" width="20"> Firebase</li>
-              <li><img src="img/skills/Azure-Devops.png" alt="Azure Devops Icon" width="20"> Azure Devops</li>  
-              <li><img src="img/skills/Flutter.png" alt="Flutter Icon" width="20"> Flutter</li>
-            </ul>
-          </div>
+
+        <h3 class="skills__subtitle" data-i18n="skills.knowledge">Conhecimentos</h3>
+        <div class="badges">
+          <!-- conhecimentos (ícones em img/knowledge) -->
+          <div class="badge"><img src="img/knowledge/QA.png" alt="QA"><span>QA</span></div>
+          <div class="badge"><img src="img/knowledge/Api.png" alt="API"><span data-i18n="knowledge.api">Testes de API</span></div>
+          <div class="badge"><img src="img/knowledge/ManualTesting.png" alt="Testes Manuais"><span data-i18n="knowledge.manual">Testes Manuais</span></div>
+          <div class="badge"><img src="img/knowledge/Automation.png" alt="Automação"><span data-i18n="knowledge.automation">Automação</span></div>
+          <div class="badge"><img src="img/knowledge/Azure-Pipelines.png" alt="Pipelines"><span>Pipelines</span></div>
+          <div class="badge"><img src="img/knowledge/Coding.png" alt="Coding"><span>Front/Back</span></div>
+          <div class="badge"><img src="img/knowledge/DataBase.png" alt="BD"><span data-i18n="knowledge.database">Banco de Dados</span></div>
+          <div class="badge"><img src="img/knowledge/Internet.png" alt="Front-end"><span data-i18n="knowledge.frontend">Testes Front-end</span></div>
+          <div class="badge"><img src="img/knowledge/Scrum.png" alt="Ágil"><span data-i18n="knowledge.agile">Metodologias Ágeis</span></div>
+          <div class="badge"><img src="img/knowledge/SoftwareEngineer.png" alt="Engenharia"><span data-i18n="knowledge.engineering">Eng. de Software</span></div>
+          <div class="badge"><img src="img/knowledge/CyberSecurity.png" alt="Cyber"><span data-i18n="knowledge.cyber">Cybersegurança</span></div>
+          <div class="badge"><img src="img/knowledge/mobileDevelopment.png" alt="Mobile Dev"><span>Mobile</span></div>
+          <div class="badge"><img src="img/knowledge/mobileTest.png" alt="Mobile Test"><span data-i18n="knowledge.mobileTest">Teste Mobile</span></div>
+          <div class="badge"><img src="img/knowledge/Hacker.png" alt="Hacker"><span data-i18n="knowledge.systems">Curioso por Sistemas</span></div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact" class="section section--alt">
+      <div class="container">
+        <h2 class="section__title" data-i18n="contact.title">Contato</h2>
+        <p class="section__lead" data-i18n="contact.lead">Vamos conversar? Me encontre nas redes ou envie um e-mail.</p>
+        <div class="social">
+          <a class="social__link" href="https://github.com/marcoslaine" target="_blank" rel="noopener" aria-label="GitHub">
+            <img src="img/contact/GitHub.png" alt="GitHub">
+            <span>@marcoslaine</span>
+          </a>
+          <a class="social__link" href="https://www.linkedin.com/in/marcos-laine" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="img/contact/Linkedin.png" alt="LinkedIn">
+            <span>/in/marcos-laine</span>
+          </a>
+          <a class="social__link" href="mailto:marcospslaine@gmail.com" target="_blank" rel="noopener" aria-label="E-mail">
+            <img src="img/contact/Gmail.png" alt="Gmail">
+            <span>marcospslaine@gmail.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer>
-    <h3>Contate-me</h3>
-    <div class="social-icons">
-      <a href="https://github.com/marcoslaine" target="_blank">
-        <img src="img/contact/GitHub.png" alt="GitHub" width="30">
-      </a>
-      <a href="https://www.linkedin.com/in/marcos-laine" target="_blank">
-        <img src="img/contact/Linkedin.png" alt="LinkedIn" width="30">
-      </a>
-      <a href="mailto:marcospslaine@gmail.com" target="_blank">
-        <img src="img/contact/Gmail.png" alt="Gmail" width="30">
-      </a>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <p data-i18n="footer.copyright">© 2025 Marcos Laine. Todos os direitos reservados.</p>
     </div>
-    <p>&copy; 2024 Marcos Laine. Todos direitos reservados.</p>
   </footer>
 </body>
 </html>

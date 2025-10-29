@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { useLanguage } from '../context/LanguageContext'
 import { useState } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 
 interface Project {
   title: string
@@ -15,27 +15,27 @@ const Projects = () => {
     {
       title: t('projects.lembretes.title'),
       description: t('projects.lembretes.description'),
-      image: 'img/carousel1/Lembretes.png'
+      image: '/img/carousel1/Lembretes.png'
     },
     {
       title: t('projects.poker.title'),
       description: t('projects.poker.description'),
-      image: 'img/carousel1/Poker.png'
+      image: '/img/carousel1/Poker.png'
     },
     {
       title: t('projects.financiart.title'),
       description: t('projects.financiart.description'),
-      image: 'img/carousel1/financiart.png'
+      image: '/img/carousel1/financiart.png'
     },
     {
       title: t('projects.memoria.title'),
       description: t('projects.memoria.description'),
-      image: 'img/carousel1/memoria.png'
+      image: '/img/carousel1/memoria.png'
     },
     {
       title: t('projects.tictactoe.title'),
       description: t('projects.tictactoe.description'),
-      image: 'img/carousel1/tictactoe.png'
+      image: '/img/carousel1/tictactoe.png'
     }
   ]
 
@@ -43,12 +43,12 @@ const Projects = () => {
     {
       title: t('projects.backtesting.title'),
       description: t('projects.backtesting.description'),
-      image: 'img/carousel2/Backtesting.png'
+      image: '/img/carousel2/Backtesting.png'
     },
     {
       title: t('projects.market.title'),
       description: t('projects.market.description'),
-      image: 'img/carousel2/Relatório_mercado.png'
+      image: '/img/carousel2/Relatório_mercado.png'
     }
   ]
 

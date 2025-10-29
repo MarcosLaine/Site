@@ -82,7 +82,7 @@ const Hero = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500 rounded-3xl blur-2xl opacity-50" />
               <img
-                src="img/about_me/Profile-photo.jpeg"
+                src="/img/about_me/Profile-photo.jpeg"
                 alt="Marcos Laine"
                 className="relative w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-white/10"
               />

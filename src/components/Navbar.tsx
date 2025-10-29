@@ -84,7 +84,7 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
             </motion.button>
 
             <motion.a
-              href="docs/Marcos_Laine_QA.pdf"
+              href="/docs/Marcos_Laine_QA.pdf"
               download
               className="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow"
               whileHover={{ scale: 1.05 }}

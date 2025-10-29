@@ -8,19 +8,19 @@ const Contact = () => {
     {
       name: 'GitHub',
       url: 'https://github.com/marcoslaine',
-      icon: 'img/contact/GitHub.png',
+      icon: '/img/contact/GitHub.png',
       handle: '@marcoslaine'
     },
     {
       name: 'LinkedIn',
       url: 'https://www.linkedin.com/in/marcos-laine',
-      icon: 'img/contact/Linkedin.png',
+      icon: '/img/contact/Linkedin.png',
       handle: '/in/marcos-laine'
     },
     {
       name: 'Email',
       url: 'mailto:marcospslaine@gmail.com',
-      icon: 'img/contact/Gmail.png',
+      icon: '/img/contact/Gmail.png',
       handle: 'marcospslaine@gmail.com'
     }
   ]

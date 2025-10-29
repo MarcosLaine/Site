@@ -23,15 +23,6 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <span className="text-primary-400">Made with</span>
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              className="text-red-500"
-            >
-              ❤️
-            </motion.span>
-            <span className="text-accent-400">and React</span>
           </motion.div>
         </motion.div>
       </div>

@@ -46,7 +46,7 @@ const About = () => {
                 whileHover={{ scale: 1.05, rotate: 2 }}
               >
                 <img
-                  src="img/about_me/adi-logo.jpeg"
+                  src="/img/about_me/adi-logo.jpeg"
                   alt="ADI Global"
                   className="w-40 h-auto rounded-lg"
                 />

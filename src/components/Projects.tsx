@@ -238,7 +238,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                🚀 Demo
+                🚀 Teste você mesmo!
               </motion.a>
             )}
             {project.github_link && !project.is_github_private && (
@@ -250,7 +250,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                💻 GitHub
+                💻 Repositório no GitHub
               </motion.a>
             )}
           </div>

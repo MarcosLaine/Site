@@ -39,9 +39,25 @@ const Projects = () => {
     fetchProjects()
   }, [])
 
-  // Separar projetos por categoria
-  const frontendProjects = projects.filter(p => p.category === 'frontend')
-  const mercadoProjects = projects.filter(p => p.category === 'mercado')
+  // Agrupar projetos por categoria automaticamente
+  const projectsByCategory = projects.reduce((acc, project) => {
+    const category = project.category || 'geral'
+    if (!acc[category]) {
+      acc[category] = []
+    }
+    acc[category].push(project)
+    return acc
+  }, {} as Record<string, Project[]>)
+
+  // Mapear nomes das categorias
+  const categoryNames: Record<string, string> = {
+    'frontend': t('projects.carousel1.title'),
+    'mercado': t('projects.carousel2.title'),
+    'mobile': 'Mobile / Apps',
+    'backend': 'Backend / APIs',
+    'fullstack': 'Full Stack',
+    'geral': 'Outros Projetos'
+  }
 
   if (loading) {
     return (
@@ -84,15 +100,15 @@ const Projects = () => {
             {t('projects.lead')}
           </p>
 
-          {/* Carousel Frontend */}
-          {frontendProjects.length > 0 && (
-            <Carousel title={t('projects.carousel1.title')} projects={frontendProjects} delay={0} />
-          )}
-
-          {/* Carousel Mercado */}
-          {mercadoProjects.length > 0 && (
-            <Carousel title={t('projects.carousel2.title')} projects={mercadoProjects} delay={0.2} />
-          )}
+          {/* Carrosséis dinâmicos - aparecem automaticamente conforme categorias no banco */}
+          {Object.entries(projectsByCategory).map(([category, categoryProjects], index) => (
+            <Carousel 
+              key={category}
+              title={categoryNames[category] || category.charAt(0).toUpperCase() + category.slice(1)}
+              projects={categoryProjects}
+              delay={index * 0.2}
+            />
+          ))}
         </motion.div>
       </div>
     </section>

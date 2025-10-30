@@ -10,6 +10,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Trust proxy (necessário para Render, Railway, Heroku, etc)
+app.set('trust proxy', 1);
+
 // Middlewares de segurança
 app.use(helmet());
 

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { projectsAPI } from '../services/api'
 
@@ -7,7 +7,7 @@ interface Project {
   id: number
   name: string
   description: string
-  media_url: string
+  media_url: string | string[]  // Pode ser URL única ou array de URLs
   media_type: 'image' | 'video'
   test_link?: string
   github_link?: string
@@ -188,6 +188,35 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  
+  // Processar media_url (pode ser string ou array)
+  const mediaUrls = useMemo(() => {
+    if (typeof project.media_url === 'string') {
+      // Tentar parsear como JSON
+      try {
+        const parsed = JSON.parse(project.media_url)
+        return Array.isArray(parsed) ? parsed : [project.media_url]
+      } catch {
+        return [project.media_url]
+      }
+    }
+    return Array.isArray(project.media_url) ? project.media_url : [project.media_url]
+  }, [project.media_url])
+
+  const hasMultipleImages = mediaUrls.length > 1
+
+  // Carrossel automático - troca a cada 5 segundos
+  useEffect(() => {
+    if (!hasMultipleImages) return
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % mediaUrls.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [hasMultipleImages, mediaUrls.length])
+
   return (
     <motion.div
       className="min-w-[240px] xs:min-w-[260px] sm:min-w-[300px] md:min-w-[320px] glass-light dark:glass rounded-xl sm:rounded-2xl overflow-hidden shadow-xl flex flex-col"
@@ -200,7 +229,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
       <div className="relative h-36 sm:h-44 md:h-48 overflow-hidden bg-slate-200 dark:bg-slate-800/50">
         {project.media_type === 'video' ? (
           <video
-            src={project.media_url}
+            src={mediaUrls[0]}
             className="w-full h-full object-cover"
             muted
             loop
@@ -209,13 +238,39 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
             onMouseLeave={(e) => (e.target as HTMLVideoElement).pause()}
           />
         ) : (
-          <motion.img
-            src={project.media_url}
-            alt={project.name}
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.3 }}
-          />
+          <>
+            {/* Carrossel de imagens */}
+            {mediaUrls.map((url, idx) => (
+              <motion.img
+                key={idx}
+                src={url}
+                alt={`${project.name} - ${idx + 1}`}
+                className="absolute inset-0 w-full h-full object-cover"
+                initial={{ opacity: 0 }}
+                animate={{ 
+                  opacity: currentImageIndex === idx ? 1 : 0,
+                  scale: currentImageIndex === idx ? 1 : 1.05
+                }}
+                transition={{ duration: 0.5 }}
+              />
+            ))}
+            
+            {/* Indicadores de imagem */}
+            {hasMultipleImages && (
+              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-10">
+                {mediaUrls.map((_, idx) => (
+                  <div
+                    key={idx}
+                    className={`w-1.5 h-1.5 rounded-full transition-all ${
+                      currentImageIndex === idx 
+                        ? 'bg-white w-4' 
+                        : 'bg-white/50'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
       <div className="p-4 sm:p-5 space-y-2 flex-1 flex flex-col">

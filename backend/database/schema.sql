@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS projects (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
-  media_url VARCHAR(500) NOT NULL,
+  media_url TEXT NOT NULL COMMENT 'Pode ser URL única ou JSON array ["url1", "url2"]',
   media_type ENUM('image', 'video') DEFAULT 'image',
   test_link VARCHAR(500),
   github_link VARCHAR(500),

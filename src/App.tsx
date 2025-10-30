@@ -1,25 +1,30 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import About from './components/About'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
+import BackgroundEffects from './components/BackgroundEffects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Hero from './components/Hero'
+import Navbar from './components/Navbar'
+import Projects from './components/Projects'
+import Skills from './components/Skills'
 import { LanguageProvider } from './context/LanguageContext'
-import BackgroundEffects from './components/BackgroundEffects'
 
 function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     const saved = localStorage.getItem('theme')
-    return (saved as 'dark' | 'light') || 'dark'
+    return (saved as 'dark' | 'light') || 'dark'  // Padrão: dark
   })
 
   useEffect(() => {
     document.body.classList.remove('dark', 'light')
     document.body.classList.add(theme)
     localStorage.setItem('theme', theme)
+    
+    // Garantir que inicie sempre no dark se não houver preferência salva
+    if (!localStorage.getItem('theme')) {
+      document.body.classList.add('dark')
+    }
   }, [theme])
 
   const toggleTheme = () => {

@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         env:
-          VITE_API_URL: https://site-x4ev.onrender.com/api
+          VITE_API_URL: https://site-yor6.onrender.com/api
         run: npm run build
 
       - name: Upload artifact

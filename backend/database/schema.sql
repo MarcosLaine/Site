@@ -20,12 +20,6 @@ CREATE TABLE IF NOT EXISTS projects (
 
 -- Dados de exemplo (você pode adaptar com seus projetos reais)
 INSERT INTO projects (name, description, media_url, media_type, test_link, github_link, is_github_private, category, order_index) VALUES
-('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', 1),
-('Prob. Poker', 'Ferramenta didática para análise probabilística de mãos.', '/img/carousel1/Poker.png', 'image', NULL, 'https://github.com/marcoslaine/poker', false, 'frontend', 2),
-('Financiart', 'Página auxiliar de investimentos (front, back e BD básicos).', '/img/carousel1/financiart.png', 'image', NULL, 'https://github.com/marcoslaine/financiart', false, 'frontend', 3),
-('Memória', 'Jogo clássico implementado para estudos de JS/DOM.', '/img/carousel1/memoria.png', 'image', NULL, 'https://github.com/marcoslaine/memoria', false, 'frontend', 4),
-('Tic-Tac-Toe', 'Implementação do jogo da velha em JavaScript.', '/img/carousel1/tictactoe.png', 'image', NULL, 'https://github.com/marcoslaine/tictactoe', false, 'frontend', 5),
-('Backtesting', 'Protótipos de backtest para estudos de estratégia.', '/img/carousel2/Backtesting.png', 'image', NULL, NULL, true, 'mercado', 6),
-('Relatório de Mercado', 'Geração de relatórios com indicadores selecionados.', '/img/carousel2/Relatório_mercado.png', 'image', NULL, NULL, true, 'mercado', 7);
+('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', 1)
 
 

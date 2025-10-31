@@ -313,45 +313,59 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         {/* Seção de Tecnologias - Compacta */}
         {technologiesList.length > 0 && (
           <div className="flex-shrink-0 pt-1.5 pb-1 border-t border-slate-200/30 dark:border-slate-700/30">
-            <div className="flex items-center gap-1.5 mb-1.5">
-              <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">
-                Tech:
-              </span>
-              <div className="flex flex-wrap gap-1 flex-1">
-                {visibleTechnologies.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
-                  >
-                    {tech}
-                  </span>
-                ))}
-                {hasMoreTechnologies && !showAllTechnologies && (
-                  <button
-                    onClick={() => setShowAllTechnologies(true)}
-                    className="px-1.5 py-0.5 text-[9px] sm:text-[10px] text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline decoration-dotted"
-                  >
-                    +{technologiesList.length - MAX_TECHNOLOGIES_VISIBLE}
-                  </button>
-                )}
+            {!showAllTechnologies ? (
+              <div className="flex items-center gap-1.5">
+                <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide flex-shrink-0">
+                  Tech:
+                </span>
+                <div className="flex flex-wrap gap-1 flex-1 min-w-0">
+                  {visibleTechnologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {hasMoreTechnologies && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setShowAllTechnologies(true)
+                      }}
+                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline decoration-dotted flex-shrink-0"
+                    >
+                      +{technologiesList.length - MAX_TECHNOLOGIES_VISIBLE}
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
-            {hasMoreTechnologies && showAllTechnologies && (
-              <div className="flex flex-wrap gap-1 mt-1.5 max-h-[60px] overflow-y-auto">
-                {technologiesList.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
-                  >
-                    {tech}
+            ) : (
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">
+                    Tecnologias ({technologiesList.length}):
                   </span>
-                ))}
-                <button
-                  onClick={() => setShowAllTechnologies(false)}
-                  className="px-1.5 py-0.5 text-[9px] sm:text-[10px] text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline"
-                >
-                  menos
-                </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setShowAllTechnologies(false)
+                    }}
+                    className="px-1.5 py-0.5 text-[9px] sm:text-[10px] text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline flex-shrink-0"
+                  >
+                    Fechar
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-1 max-h-[50px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-primary-500/30 scrollbar-track-transparent">
+                  {technologiesList.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
           </div>

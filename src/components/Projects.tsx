@@ -172,7 +172,7 @@ const Carousel = ({ title, projects, delay }: CarouselProps) => {
 
       <div
         id={`carousel-${title}`}
-        className="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+        className="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 items-start"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {projects.map((project, index) => (
@@ -249,7 +249,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <motion.div
-      className="min-w-[280px] xs:min-w-[300px] sm:min-w-[340px] md:min-w-[380px] h-[380px] sm:h-[420px] md:h-[460px] glass-light dark:glass rounded-xl sm:rounded-2xl overflow-hidden shadow-xl flex flex-col"
+      className="min-w-[280px] xs:min-w-[300px] sm:min-w-[340px] md:min-w-[380px] h-[380px] sm:h-[420px] md:h-[460px] glass-light dark:glass rounded-xl sm:rounded-2xl overflow-hidden shadow-xl flex flex-col flex-shrink-0"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}

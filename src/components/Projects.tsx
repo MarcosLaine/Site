@@ -219,7 +219,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <motion.div
-      className="min-w-[240px] xs:min-w-[260px] sm:min-w-[300px] md:min-w-[320px] glass-light dark:glass rounded-xl sm:rounded-2xl overflow-hidden shadow-xl flex flex-col"
+      className="min-w-[240px] xs:min-w-[260px] sm:min-w-[300px] md:min-w-[320px] h-[340px] sm:h-[380px] md:h-[420px] glass-light dark:glass rounded-xl sm:rounded-2xl overflow-hidden shadow-xl flex flex-col"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -273,11 +273,11 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </>
         )}
       </div>
-      <div className="p-4 sm:p-5 space-y-2 flex-1 flex flex-col">
-        <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100">
+      <div className="p-4 sm:p-5 space-y-2 flex-1 flex flex-col min-h-0">
+        <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2">
           {project.name}
         </h4>
-        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 flex-1">
+        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 flex-1 line-clamp-3 overflow-hidden">
           {project.description}
         </p>
         

@@ -224,7 +224,6 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      whileHover={{ scale: 1.05, y: -10 }}
     >
       <div className="relative h-44 sm:h-52 md:h-60 overflow-hidden bg-slate-200 dark:bg-slate-800/50">
         {project.media_type === 'video' ? (

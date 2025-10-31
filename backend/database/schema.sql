@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS projects (
   github_link VARCHAR(500),
   is_github_private BOOLEAN DEFAULT false,
   category VARCHAR(100) DEFAULT 'geral',
+  technologies TEXT COMMENT 'JSON array de tecnologias ["React", "Node.js", "MySQL"]',
   order_index INT DEFAULT 0,
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -19,7 +20,8 @@ CREATE TABLE IF NOT EXISTS projects (
 );
 
 -- Dados de exemplo (você pode adaptar com seus projetos reais)
-INSERT INTO projects (name, description, media_url, media_type, test_link, github_link, is_github_private, category, order_index) VALUES
-('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', 1)
+-- Note: O campo technologies pode ser NULL ou um JSON array como: '["React", "Node.js", "MySQL"]'
+INSERT INTO projects (name, description, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) VALUES
+('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', '["React", "TypeScript", "Tailwind CSS"]', 1)
 
 

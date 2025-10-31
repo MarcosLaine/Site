@@ -87,6 +87,7 @@ router.post('/', checkApiKey, async (req, res) => {
       github_link,
       is_github_private = false,
       category = 'geral',
+      technologies,
       order_index = 0
     } = req.body;
     
@@ -98,11 +99,16 @@ router.post('/', checkApiKey, async (req, res) => {
       });
     }
     
+    // Converter technologies para JSON string se for array
+    const technologiesJson = technologies 
+      ? (Array.isArray(technologies) ? JSON.stringify(technologies) : technologies)
+      : null;
+
     const [result] = await pool.execute(
       `INSERT INTO projects 
-      (name, description, media_url, media_type, test_link, github_link, is_github_private, category, order_index) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [name, description, media_url, media_type, test_link, github_link, is_github_private, category, order_index]
+      (name, description, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [name, description, media_url, media_type, test_link, github_link, is_github_private, category, technologiesJson, order_index]
     );
     
     res.status(201).json({
@@ -117,6 +123,7 @@ router.post('/', checkApiKey, async (req, res) => {
         github_link,
         is_github_private,
         category,
+        technologies: technologiesJson,
         order_index
       },
       message: 'Projeto criado com sucesso'
@@ -143,6 +150,7 @@ router.put('/:id', checkApiKey, async (req, res) => {
       github_link,
       is_github_private,
       category,
+      technologies,
       order_index,
       is_active
     } = req.body;
@@ -158,6 +166,11 @@ router.put('/:id', checkApiKey, async (req, res) => {
     if (github_link !== undefined) { fields.push('github_link = ?'); values.push(github_link); }
     if (is_github_private !== undefined) { fields.push('is_github_private = ?'); values.push(is_github_private); }
     if (category !== undefined) { fields.push('category = ?'); values.push(category); }
+    if (technologies !== undefined) { 
+      const technologiesJson = Array.isArray(technologies) ? JSON.stringify(technologies) : technologies;
+      fields.push('technologies = ?'); 
+      values.push(technologiesJson); 
+    }
     if (order_index !== undefined) { fields.push('order_index = ?'); values.push(order_index); }
     if (is_active !== undefined) { fields.push('is_active = ?'); values.push(is_active); }
     

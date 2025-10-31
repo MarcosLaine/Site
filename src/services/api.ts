@@ -10,6 +10,7 @@ export interface Project {
   github_link?: string;
   is_github_private: boolean;
   category: string;
+  technologies?: string | string[]; // JSON string ou array de tecnologias
   order_index: number;
   is_active: boolean;
   created_at: string;

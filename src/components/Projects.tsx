@@ -13,6 +13,7 @@ interface Project {
   github_link?: string
   is_github_private: boolean
   category: string
+  technologies?: string | string[] // JSON string ou array de tecnologias
 }
 
 const Projects = () => {
@@ -204,6 +205,27 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     return Array.isArray(project.media_url) ? project.media_url : [project.media_url]
   }, [project.media_url])
 
+  // Processar technologies (pode ser string JSON ou array)
+  const technologiesList = useMemo(() => {
+    if (!project.technologies) return []
+    
+    if (Array.isArray(project.technologies)) {
+      return project.technologies
+    }
+    
+    if (typeof project.technologies === 'string') {
+      try {
+        const parsed = JSON.parse(project.technologies)
+        return Array.isArray(parsed) ? parsed : []
+      } catch {
+        // Se não for JSON válido, retorna como array com um único item
+        return project.technologies ? [project.technologies] : []
+      }
+    }
+    
+    return []
+  }, [project.technologies])
+
   const hasMultipleImages = mediaUrls.length > 1
 
   // Carrossel automático - troca a cada 5 segundos
@@ -279,6 +301,20 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 flex-1 line-clamp-3 overflow-hidden">
           {project.description}
         </p>
+        
+        {/* Seção de Tecnologias */}
+        {technologiesList.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-2">
+            {technologiesList.map((tech, idx) => (
+              <span
+                key={idx}
+                className="px-2 py-1 text-[10px] sm:text-xs rounded-md bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-500/20 dark:border-primary-500/30 font-medium"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
         
         {/* Links */}
         <div className="flex gap-2 pt-2 mt-auto">

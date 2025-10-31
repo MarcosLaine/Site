@@ -302,17 +302,20 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </>
         )}
       </div>
-      <div className="p-4 sm:p-5 flex-1 flex flex-col min-h-0 gap-2">
-        <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2 flex-shrink-0">
-          {project.name}
-        </h4>
-        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 line-clamp-2 flex-shrink-0">
-          {project.description}
-        </p>
+      <div className="p-4 sm:p-5 flex-1 flex flex-col min-h-0 overflow-hidden">
+        {/* Nome e Descrição - Sempre visíveis */}
+        <div className="flex-shrink-0 space-y-1.5 mb-2">
+          <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2">
+            {project.name}
+          </h4>
+          <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 line-clamp-2">
+            {project.description}
+          </p>
+        </div>
         
-        {/* Seção de Tecnologias - Compacta */}
+        {/* Seção de Tecnologias - Controlada */}
         {technologiesList.length > 0 && (
-          <div className="flex-shrink-0 pt-1.5 pb-1 border-t border-slate-200/30 dark:border-slate-700/30">
+          <div className={`flex-shrink-0 border-t border-slate-200/30 dark:border-slate-700/30 ${showAllTechnologies ? 'pt-2 pb-2' : 'pt-1.5 pb-1'}`}>
             {!showAllTechnologies ? (
               <div className="flex items-center gap-1.5">
                 <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide flex-shrink-0">
@@ -341,10 +344,10 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 </div>
               </div>
             ) : (
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
+              <div className="space-y-1">
+                <div className="flex items-center justify-between mb-1">
                   <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">
-                    Tecnologias ({technologiesList.length}):
+                    Tech ({technologiesList.length}):
                   </span>
                   <button
                     onClick={(e) => {
@@ -356,7 +359,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                     Fechar
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-1 max-h-[50px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-primary-500/30 scrollbar-track-transparent">
+                <div className="flex flex-wrap gap-1 max-h-[45px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-primary-500/30 scrollbar-track-transparent">
                   {technologiesList.map((tech, idx) => (
                     <span
                       key={idx}
@@ -371,8 +374,8 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </div>
         )}
         
-        {/* Links */}
-        <div className={`flex gap-2 flex-shrink-0 mt-auto ${showAllTechnologies ? 'pt-3' : 'pt-1'}`}>
+        {/* Links - Sempre no final */}
+        <div className="flex gap-2 flex-shrink-0 mt-auto pt-2">
           {project.test_link && (
             <motion.a
               href={project.test_link}

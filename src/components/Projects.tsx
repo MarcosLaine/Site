@@ -245,7 +245,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 key={idx}
                 src={url}
                 alt={`${project.name} - ${idx + 1}`}
-                className="absolute inset-0 w-full h-full object-contain"
+                className="absolute inset-0 w-full h-full object-cover"
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: currentImageIndex === idx ? 1 : 0,

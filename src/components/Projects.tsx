@@ -387,17 +387,17 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         )}
         
         {/* Links - Sempre no final */}
-        <div className="flex gap-2 flex-shrink-0 mt-auto pt-2">
+        <div className="flex gap-1.5 sm:gap-2 flex-shrink-0 mt-auto pt-2 w-full">
           {project.test_link && (
             <motion.a
               href={project.test_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 text-xs sm:text-sm rounded-lg bg-primary-500 hover:bg-primary-600 text-white font-medium transition-colors text-center whitespace-nowrap"
+              className="px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs rounded-lg bg-primary-500 hover:bg-primary-600 text-white font-medium transition-colors text-center whitespace-nowrap flex-1 min-w-0"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              🚀 Teste você mesmo!
+              <span className="hidden sm:inline">🚀 </span>Teste
             </motion.a>
           )}
           {project.github_link && !project.is_github_private && (
@@ -405,11 +405,11 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               href={project.github_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 text-xs sm:text-sm rounded-lg border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium transition-colors text-center whitespace-nowrap"
+              className="px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs rounded-lg border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium transition-colors text-center whitespace-nowrap flex-1 min-w-0"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              💻 Repositório no GitHub
+              <span className="hidden sm:inline">💻 </span>GitHub
             </motion.a>
           )}
         </div>

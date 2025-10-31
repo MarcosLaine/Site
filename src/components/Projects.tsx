@@ -219,14 +219,14 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <motion.div
-      className="min-w-[240px] xs:min-w-[260px] sm:min-w-[300px] md:min-w-[320px] h-[340px] sm:h-[380px] md:h-[420px] glass-light dark:glass rounded-xl sm:rounded-2xl overflow-hidden shadow-xl flex flex-col"
+      className="min-w-[280px] xs:min-w-[300px] sm:min-w-[340px] md:min-w-[380px] h-[380px] sm:h-[420px] md:h-[460px] glass-light dark:glass rounded-xl sm:rounded-2xl overflow-hidden shadow-xl flex flex-col"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ scale: 1.05, y: -10 }}
     >
-      <div className="relative h-36 sm:h-44 md:h-48 overflow-hidden bg-slate-200 dark:bg-slate-800/50">
+      <div className="relative h-44 sm:h-52 md:h-60 overflow-hidden bg-slate-200 dark:bg-slate-800/50">
         {project.media_type === 'video' ? (
           <video
             src={mediaUrls[0]}

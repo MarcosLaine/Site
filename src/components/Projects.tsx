@@ -191,6 +191,9 @@ interface ProjectCardProps {
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [showAllTechnologies, setShowAllTechnologies] = useState(false)
+  const [showFullDescription, setShowFullDescription] = useState(false)
+  const [descriptionRef, setDescriptionRef] = useState<HTMLParagraphElement | null>(null)
+  const [needsExpandButton, setNeedsExpandButton] = useState(false)
   
   // Processar media_url (pode ser string ou array)
   const mediaUrls = useMemo(() => {
@@ -246,6 +249,51 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
     return () => clearInterval(interval)
   }, [hasMultipleImages, mediaUrls.length])
+
+  // Verificar se a descrição precisa do botão "ver mais"
+  useEffect(() => {
+    if (descriptionRef && !showFullDescription) {
+      // Verificar se o conteúdo ultrapassa a altura visível
+      // Quando line-clamp está ativo, scrollHeight será maior que clientHeight
+      const checkHeight = () => {
+        if (descriptionRef) {
+          // Forçar reflow para garantir que line-clamp está aplicado
+          const hasLineClamp = descriptionRef.classList.contains('line-clamp-2') || 
+                               descriptionRef.style.webkitLineClamp === '2'
+          
+          if (hasLineClamp) {
+            const scrollHeight = descriptionRef.scrollHeight
+            const clientHeight = descriptionRef.clientHeight
+            setNeedsExpandButton(scrollHeight > clientHeight + 2) // +2 para margem de erro
+          } else {
+            // Se não tem line-clamp, criar elemento temporário para medir
+            const tempElement = document.createElement('p')
+            tempElement.textContent = project.description
+            tempElement.className = descriptionRef.className.replace('line-clamp-2', '').trim()
+            tempElement.style.position = 'absolute'
+            tempElement.style.visibility = 'hidden'
+            tempElement.style.width = descriptionRef.offsetWidth + 'px'
+            tempElement.style.padding = '0'
+            tempElement.style.margin = '0'
+            document.body.appendChild(tempElement)
+            
+            const fullHeight = tempElement.offsetHeight
+            const clampedHeight = descriptionRef.offsetHeight
+            
+            document.body.removeChild(tempElement)
+            setNeedsExpandButton(fullHeight > clampedHeight + 2)
+          }
+        }
+      }
+      
+      // Executar após o DOM atualizar
+      setTimeout(checkHeight, 0)
+      
+      // Também verificar em resize
+      window.addEventListener('resize', checkHeight)
+      return () => window.removeEventListener('resize', checkHeight)
+    }
+  }, [descriptionRef, project.description, showFullDescription])
 
   return (
     <motion.div
@@ -311,9 +359,27 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2">
             {project.name}
           </h4>
-          <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 line-clamp-2">
-            {project.description}
-          </p>
+          <div className="space-y-1">
+            <p 
+              ref={setDescriptionRef}
+              className={`text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 ${
+                !showFullDescription ? 'line-clamp-2' : ''
+              }`}
+            >
+              {project.description}
+            </p>
+            {needsExpandButton && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowFullDescription(!showFullDescription)
+                }}
+                className="text-[10px] sm:text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline decoration-dotted"
+              >
+                {showFullDescription ? 'Ver menos' : 'Ver mais'}
+              </button>
+            )}
+          </div>
         </div>
         
         {/* Seção de Tecnologias - Controlada */}

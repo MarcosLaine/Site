@@ -281,34 +281,32 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         </p>
         
         {/* Links */}
-        {(project.test_link || (project.github_link && !project.is_github_private)) && (
-          <div className="flex gap-2 pt-2">
-            {project.test_link && (
-              <motion.a
-                href={project.test_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-1.5 text-xs sm:text-sm rounded-lg bg-primary-500 hover:bg-primary-600 text-white font-medium transition-colors flex-1 text-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                🚀 Teste você mesmo!
-              </motion.a>
-            )}
-            {project.github_link && !project.is_github_private && (
-              <motion.a
-                href={project.github_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-1.5 text-xs sm:text-sm rounded-lg border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium transition-colors flex-1 text-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                💻 Repositório no GitHub
-              </motion.a>
-            )}
-          </div>
-        )}
+        <div className="flex gap-2 pt-2 mt-auto">
+          {project.test_link && (
+            <motion.a
+              href={project.test_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-xs sm:text-sm rounded-lg bg-primary-500 hover:bg-primary-600 text-white font-medium transition-colors text-center whitespace-nowrap"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              🚀 Teste você mesmo!
+            </motion.a>
+          )}
+          {project.github_link && !project.is_github_private && (
+            <motion.a
+              href={project.github_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-xs sm:text-sm rounded-lg border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium transition-colors text-center whitespace-nowrap"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              💻 Repositório no GitHub
+            </motion.a>
+          )}
+        </div>
       </div>
     </motion.div>
   )

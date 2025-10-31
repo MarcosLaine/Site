@@ -227,8 +227,8 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     return []
   }, [project.technologies])
 
-  // Limitar tecnologias visíveis inicialmente (máximo 8 tags)
-  const MAX_TECHNOLOGIES_VISIBLE = 8
+  // Limitar tecnologias visíveis inicialmente (máximo 5 tags em uma linha)
+  const MAX_TECHNOLOGIES_VISIBLE = 5
   const visibleTechnologies = showAllTechnologies 
     ? technologiesList 
     : technologiesList.slice(0, MAX_TECHNOLOGIES_VISIBLE)
@@ -302,50 +302,63 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </>
         )}
       </div>
-      <div className="p-4 sm:p-5 space-y-2 flex-1 flex flex-col min-h-0">
-        <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col min-h-0 gap-2">
+        <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2 flex-shrink-0">
           {project.name}
         </h4>
-        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 flex-1 line-clamp-3 overflow-hidden">
+        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 line-clamp-2 flex-shrink-0">
           {project.description}
         </p>
         
-        {/* Seção de Tecnologias */}
+        {/* Seção de Tecnologias - Compacta */}
         {technologiesList.length > 0 && (
-          <div className="pt-3 pb-2 border-t border-slate-200/50 dark:border-slate-700/50">
-            <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mb-2 font-semibold uppercase tracking-wide">
-              Tecnologias
-            </p>
-            <div className={`flex flex-wrap gap-1.5 sm:gap-2 ${!showAllTechnologies ? 'max-h-[72px] sm:max-h-[80px] overflow-hidden' : ''}`}>
-              {visibleTechnologies.map((tech, idx) => (
-                <motion.span
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.03 }}
-                  className="px-2.5 py-1 text-[10px] sm:text-xs rounded-lg bg-gradient-to-r from-primary-500/15 to-primary-600/15 dark:from-primary-500/25 dark:to-primary-600/25 text-primary-800 dark:text-primary-200 border border-primary-400/30 dark:border-primary-500/40 font-medium shadow-sm hover:shadow-md hover:scale-105 transition-all whitespace-nowrap"
-                >
-                  {tech}
-                </motion.span>
-              ))}
+          <div className="flex-shrink-0 pt-1.5 pb-1 border-t border-slate-200/30 dark:border-slate-700/30">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">
+                Tech:
+              </span>
+              <div className="flex flex-wrap gap-1 flex-1">
+                {visibleTechnologies.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {hasMoreTechnologies && !showAllTechnologies && (
+                  <button
+                    onClick={() => setShowAllTechnologies(true)}
+                    className="px-1.5 py-0.5 text-[9px] sm:text-[10px] text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline decoration-dotted"
+                  >
+                    +{technologiesList.length - MAX_TECHNOLOGIES_VISIBLE}
+                  </button>
+                )}
+              </div>
             </div>
-            {hasMoreTechnologies && (
-              <motion.button
-                onClick={() => setShowAllTechnologies(!showAllTechnologies)}
-                className="mt-2.5 text-[10px] sm:text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors underline decoration-dotted"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {showAllTechnologies 
-                  ? `↗ Ver menos (${technologiesList.length})` 
-                  : `↘ Ver +${technologiesList.length - MAX_TECHNOLOGIES_VISIBLE} mais`}
-              </motion.button>
+            {hasMoreTechnologies && showAllTechnologies && (
+              <div className="flex flex-wrap gap-1 mt-1.5 max-h-[60px] overflow-y-auto">
+                {technologiesList.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                <button
+                  onClick={() => setShowAllTechnologies(false)}
+                  className="px-1.5 py-0.5 text-[9px] sm:text-[10px] text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline"
+                >
+                  menos
+                </button>
+              </div>
             )}
           </div>
         )}
         
         {/* Links */}
-        <div className="flex gap-2 pt-2 mt-auto">
+        <div className="flex gap-2 flex-shrink-0 mt-auto pt-1">
           {project.test_link && (
             <motion.a
               href={project.test_link}

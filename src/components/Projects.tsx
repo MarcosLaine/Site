@@ -372,7 +372,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         )}
         
         {/* Links */}
-        <div className="flex gap-2 flex-shrink-0 mt-auto pt-1">
+        <div className={`flex gap-2 flex-shrink-0 mt-auto ${showAllTechnologies ? 'pt-3' : 'pt-1'}`}>
           {project.test_link && (
             <motion.a
               href={project.test_link}

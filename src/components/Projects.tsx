@@ -249,7 +249,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <motion.div
-      className={`min-w-[280px] xs:min-w-[300px] sm:min-w-[340px] md:min-w-[380px] glass-light dark:glass rounded-xl sm:rounded-2xl shadow-xl flex flex-col flex-shrink-0 transition-all duration-300 ${
+      className={`min-w-[280px] max-w-[280px] sm:min-w-[340px] sm:max-w-[340px] md:min-w-[380px] md:max-w-[380px] glass-light dark:glass rounded-xl sm:rounded-2xl shadow-xl flex flex-col flex-shrink-0 transition-all duration-300 ${
         showAllTechnologies ? 'h-auto overflow-visible' : 'h-[380px] sm:h-[420px] md:h-[460px] overflow-hidden'
       }`}
       layout
@@ -305,7 +305,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </>
         )}
       </div>
-      <div className={`p-4 sm:p-5 flex-1 flex flex-col ${showAllTechnologies ? 'min-h-0' : 'min-h-0 overflow-hidden'}`}>
+      <div className={`p-4 sm:p-5 flex-1 flex flex-col w-full ${showAllTechnologies ? 'min-h-0' : 'min-h-0 overflow-hidden'}`}>
         {/* Nome e Descrição - Sempre visíveis */}
         <div className="flex-shrink-0 space-y-1.5 mb-2">
           <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2">
@@ -324,11 +324,11 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide flex-shrink-0">
                   Tech:
                 </span>
-                <div className="flex flex-wrap gap-1 flex-1 min-w-0">
+                <div className="flex flex-wrap gap-1 flex-1 min-w-0 w-full">
                   {visibleTechnologies.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
+                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap flex-shrink-0"
                     >
                       {tech}
                     </span>
@@ -368,14 +368,14 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                     Fechar
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1 w-full">
                   {technologiesList.map((tech, idx) => (
                     <motion.span
                       key={idx}
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: idx * 0.02 }}
-                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap"
+                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap flex-shrink-0"
                     >
                       {tech}
                     </motion.span>

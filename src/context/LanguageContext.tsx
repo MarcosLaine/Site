@@ -137,12 +137,23 @@ const translations = {
   }
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+// Valor padrão para o contexto
+const defaultContextValue: LanguageContextType = {
+  language: 'pt',
+  setLanguage: () => {},
+  t: (key: string) => key
+}
+
+const LanguageContext = createContext<LanguageContextType>(defaultContextValue)
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('language')
-    return (saved as Language) || 'pt'
+    // Verificar se está no ambiente do navegador antes de acessar localStorage
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('language')
+      return (saved === 'pt' || saved === 'en') ? saved : 'pt'
+    }
+    return 'pt'
   })
 
   const t = (key: string): string => {
@@ -151,21 +162,25 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang)
-    localStorage.setItem('language', lang)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('language', lang)
+    }
+  }
+
+  const value: LanguageContextType = {
+    language,
+    setLanguage: handleSetLanguage,
+    t
   }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   )
 }
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext)
-  if (!context) {
-    throw new Error('useLanguage must be used within LanguageProvider')
-  }
-  return context
+export const useLanguage = (): LanguageContextType => {
+  return useContext(LanguageContext)
 }
 

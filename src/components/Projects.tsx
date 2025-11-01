@@ -295,11 +295,16 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     }
   }, [descriptionRef, project.description, showFullDescription])
 
+  const isExpanded = showAllTechnologies || showFullDescription
+
   return (
     <motion.div
-      className={`min-w-[280px] max-w-[280px] sm:min-w-[340px] sm:max-w-[340px] md:min-w-[380px] md:max-w-[380px] glass-light dark:glass rounded-xl sm:rounded-2xl shadow-xl flex flex-col flex-shrink-0 transition-all duration-300 ${
-        showAllTechnologies ? 'h-auto overflow-visible' : 'h-[380px] sm:h-[420px] md:h-[460px] overflow-hidden'
+      className={`w-[280px] sm:w-[340px] md:w-[380px] glass-light dark:glass rounded-xl sm:rounded-2xl shadow-xl flex flex-col flex-shrink-0 ${
+        isExpanded ? 'overflow-visible' : 'overflow-hidden'
       }`}
+      style={{
+        height: isExpanded ? 'auto' : '380px'
+      }}
       layout
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
@@ -353,16 +358,16 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </>
         )}
       </div>
-      <div className={`p-4 sm:p-5 flex-1 flex flex-col w-full ${showAllTechnologies ? 'min-h-0' : 'min-h-0 overflow-hidden'}`}>
+      <div className={`p-4 sm:p-5 flex flex-col w-full ${isExpanded ? '' : 'flex-1 min-h-0 overflow-hidden'}`}>
         {/* Nome e Descrição - Sempre visíveis */}
-        <div className="flex-shrink-0 space-y-1.5 mb-2">
+        <div className="flex-shrink-0 space-y-1.5 mb-2 w-full">
           <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2">
             {project.name}
           </h4>
-          <div className="space-y-1">
+          <div className="space-y-1 w-full">
             <p 
               ref={setDescriptionRef}
-              className={`text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 ${
+              className={`text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 w-full ${
                 !showFullDescription ? 'line-clamp-2' : ''
               }`}
             >
@@ -384,7 +389,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         
         {/* Seção de Tecnologias - Controlada */}
         {technologiesList.length > 0 && (
-          <div className={`flex-shrink-0 border-t border-slate-200/30 dark:border-slate-700/30 ${showAllTechnologies ? 'pt-2 pb-2' : 'pt-1.5 pb-1'}`}>
+          <div className={`flex-shrink-0 border-t border-slate-200/30 dark:border-slate-700/30 w-full ${showAllTechnologies ? 'pt-2 pb-2' : 'pt-1.5 pb-1'}`}>
             {!showAllTechnologies ? (
               <div className="flex items-center gap-1.5">
                 <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide flex-shrink-0">
@@ -453,7 +458,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         )}
         
         {/* Links - Sempre no final */}
-        <div className="flex gap-1.5 sm:gap-2 flex-shrink-0 mt-auto pt-2 w-full">
+        <div className="flex gap-1.5 sm:gap-2 flex-shrink-0 mt-auto pt-2 w-full flex-wrap">
           {project.test_link && (
             <motion.a
               href={project.test_link}

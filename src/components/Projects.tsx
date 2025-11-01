@@ -190,8 +190,8 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [showAllTechnologies, setShowAllTechnologies] = useState(false)
   const [showFullDescription, setShowFullDescription] = useState(false)
+  const [showAllTechnologies, setShowAllTechnologies] = useState(false)
   const [descriptionRef, setDescriptionRef] = useState<HTMLParagraphElement | null>(null)
   const [needsExpandButton, setNeedsExpandButton] = useState(false)
   
@@ -230,12 +230,16 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     return []
   }, [project.technologies])
 
-  // Limitar tecnologias visíveis inicialmente (máximo 5 tags em uma linha)
-  const MAX_TECHNOLOGIES_VISIBLE = 5
+  // Limitar tecnologias visíveis inicialmente (máximo 2 linhas de balões - 1)
+  // Assumindo ~5-6 balões por linha no card de 280-380px, então 2 linhas - 1 = ~9 balões
+  const MAX_TECHNOLOGIES_VISIBLE = 9
+  // Mostrar todas as tecnologias se explicitamente expandido (independente da descrição)
   const visibleTechnologies = showAllTechnologies 
     ? technologiesList 
     : technologiesList.slice(0, MAX_TECHNOLOGIES_VISIBLE)
   const hasMoreTechnologies = technologiesList.length > MAX_TECHNOLOGIES_VISIBLE
+  // Só mostrar o balão "+X" se não estiver mostrando todas as tecnologias
+  const shouldShowMoreTechBalloon = hasMoreTechnologies && !showAllTechnologies
 
   const hasMultipleImages = mediaUrls.length > 1
 
@@ -295,15 +299,14 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     }
   }, [descriptionRef, project.description, showFullDescription])
 
-  const isExpanded = showAllTechnologies || showFullDescription
+  const isExpanded = showFullDescription || showAllTechnologies
 
   return (
     <motion.div
-      className={`w-[280px] sm:w-[340px] md:w-[380px] glass-light dark:glass rounded-xl sm:rounded-2xl shadow-xl flex flex-col flex-shrink-0 ${
-        isExpanded ? 'overflow-visible' : 'overflow-hidden'
-      }`}
+      className="w-[280px] sm:w-[340px] md:w-[380px] glass-light dark:glass rounded-xl sm:rounded-2xl shadow-xl flex flex-col flex-shrink-0"
       style={{
-        height: isExpanded ? 'auto' : '380px'
+        minHeight: '380px',
+        height: isExpanded ? 'auto' : 'auto'
       }}
       layout
       initial={{ opacity: 0, scale: 0.9 }}
@@ -358,7 +361,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </>
         )}
       </div>
-      <div className={`p-4 sm:p-5 flex flex-col w-full ${isExpanded ? '' : 'flex-1 min-h-0 overflow-hidden'}`}>
+      <div className="p-4 sm:p-5 flex flex-col w-full flex-grow min-h-0">
         {/* Nome e Descrição - Sempre visíveis */}
         <div className="flex-shrink-0 space-y-1.5 mb-2 w-full">
           <h4 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 line-clamp-2">
@@ -377,7 +380,16 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  setShowFullDescription(!showFullDescription)
+                  if (showFullDescription) {
+                    // Ver menos: colapsar descrição (tecnologias mantêm seu próprio estado)
+                    setShowFullDescription(false)
+                  } else {
+                    // Ver mais: expandir descrição e todas as tecnologias
+                    setShowFullDescription(true)
+                    if (hasMoreTechnologies) {
+                      setShowAllTechnologies(true)
+                    }
+                  }
                 }}
                 className="text-[10px] sm:text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline decoration-dotted"
               >
@@ -391,11 +403,13 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         {technologiesList.length > 0 && (
           <div className={`flex-shrink-0 border-t border-slate-200/30 dark:border-slate-700/30 w-full ${showAllTechnologies ? 'pt-2 pb-2' : 'pt-1.5 pb-1'}`}>
             {!showAllTechnologies ? (
-              <div className="flex items-center gap-1.5">
-                <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide flex-shrink-0">
-                  Tech:
-                </span>
-                <div className="flex flex-wrap gap-1 flex-1 min-w-0 w-full">
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide flex-shrink-0">
+                    Tech:
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1 w-full">
                   {visibleTechnologies.map((tech, idx) => (
                     <span
                       key={idx}
@@ -404,13 +418,14 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                       {tech}
                     </span>
                   ))}
-                  {hasMoreTechnologies && (
+                  {shouldShowMoreTechBalloon && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation()
                         setShowAllTechnologies(true)
                       }}
-                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium underline decoration-dotted flex-shrink-0"
+                      className="px-1.5 py-0.5 text-[9px] sm:text-[10px] rounded bg-primary-500/10 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 border border-primary-400/20 dark:border-primary-500/30 font-medium whitespace-nowrap flex-shrink-0 cursor-pointer hover:bg-primary-500/20 dark:hover:bg-primary-500/30 transition-colors"
+                      title={`Clique para ver mais ${technologiesList.length - MAX_TECHNOLOGIES_VISIBLE} tecnologias`}
                     >
                       +{technologiesList.length - MAX_TECHNOLOGIES_VISIBLE}
                     </button>

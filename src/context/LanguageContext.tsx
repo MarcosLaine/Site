@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 
 type Language = 'pt' | 'en'
 
@@ -35,6 +35,7 @@ const translations = {
     'projects.lead': 'Alguns projetos acadêmicos e pessoais — páginas web, jogos simples, ferramentas de investimento e automações.',
     'projects.carousel1.title': 'Front-end / Jogos / Utilitários',
     'projects.carousel2.title': 'Mercado / Relatórios',
+    'projects.imageClickHint': 'Clique na imagem para visualizá-la em tamanho maior',
     'projects.lembretes.title': 'Lembretes',
     'projects.lembretes.description': 'Aplicativo simples para organização de tarefas e lembretes.',
     'projects.poker.title': 'Prob. Poker',
@@ -97,6 +98,7 @@ const translations = {
     'projects.lead': 'Some academic and personal projects — web pages, simple games, investment tools and automations.',
     'projects.carousel1.title': 'Front-end / Games / Utilities',
     'projects.carousel2.title': 'Market / Reports',
+    'projects.imageClickHint': 'Click on the image to view it in full size',
     'projects.lembretes.title': 'Reminders',
     'projects.lembretes.description': 'Simple application for task organization and reminders.',
     'projects.poker.title': 'Prob. Poker',

@@ -4,6 +4,8 @@ export interface Project {
   id: number;
   name: string;
   description: string;
+  description_key?: string; // Chave para tradução
+  description_en?: string; // Descrição em inglês (alternativa)
   media_url: string;
   media_type: 'image' | 'video';
   test_link?: string;

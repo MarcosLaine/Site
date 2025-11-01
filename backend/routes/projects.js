@@ -81,6 +81,8 @@ router.post('/', checkApiKey, async (req, res) => {
     const {
       name,
       description,
+      description_key,
+      description_en,
       media_url,
       media_type = 'image',
       test_link,
@@ -106,9 +108,9 @@ router.post('/', checkApiKey, async (req, res) => {
 
     const [result] = await pool.execute(
       `INSERT INTO projects 
-      (name, description, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [name, description, media_url, media_type, test_link, github_link, is_github_private, category, technologiesJson, order_index]
+      (name, description, description_key, description_en, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [name, description, description_key || null, description_en || null, media_url, media_type, test_link, github_link, is_github_private, category, technologiesJson, order_index]
     );
     
     res.status(201).json({
@@ -117,6 +119,8 @@ router.post('/', checkApiKey, async (req, res) => {
         id: result.insertId,
         name,
         description,
+        description_key,
+        description_en,
         media_url,
         media_type,
         test_link,
@@ -144,6 +148,8 @@ router.put('/:id', checkApiKey, async (req, res) => {
     const {
       name,
       description,
+      description_key,
+      description_en,
       media_url,
       media_type,
       test_link,
@@ -160,6 +166,8 @@ router.put('/:id', checkApiKey, async (req, res) => {
     
     if (name !== undefined) { fields.push('name = ?'); values.push(name); }
     if (description !== undefined) { fields.push('description = ?'); values.push(description); }
+    if (description_key !== undefined) { fields.push('description_key = ?'); values.push(description_key); }
+    if (description_en !== undefined) { fields.push('description_en = ?'); values.push(description_en); }
     if (media_url !== undefined) { fields.push('media_url = ?'); values.push(media_url); }
     if (media_type !== undefined) { fields.push('media_type = ?'); values.push(media_type); }
     if (test_link !== undefined) { fields.push('test_link = ?'); values.push(test_link); }

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { projectsAPI } from '../services/api'
 
@@ -7,6 +8,8 @@ interface Project {
   id: number
   name: string
   description: string
+  description_key?: string // Chave para tradução
+  description_en?: string // Descrição em inglês (alternativa)
   media_url: string | string[]  // Pode ser URL única ou array de URLs
   media_type: 'image' | 'video'
   test_link?: string
@@ -189,11 +192,35 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const { t, language } = useLanguage()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [showFullDescription, setShowFullDescription] = useState(false)
   const [showAllTechnologies, setShowAllTechnologies] = useState(false)
   const [descriptionRef, setDescriptionRef] = useState<HTMLParagraphElement | null>(null)
   const [needsExpandButton, setNeedsExpandButton] = useState(false)
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
+  
+  // Obter descrição traduzida
+  const getTranslatedDescription = () => {
+    if (language === 'en') {
+      // Prioridade: description_key > description_en > description
+      if (project.description_key) {
+        const translated = t(project.description_key)
+        return translated !== project.description_key ? translated : project.description_en || project.description
+      }
+      if (project.description_en) {
+        return project.description_en
+      }
+    }
+    // Em português, usar description_key se existir, senão usar description direto
+    if (project.description_key) {
+      const translated = t(project.description_key)
+      return translated !== project.description_key ? translated : project.description
+    }
+    return project.description
+  }
+  
+  const translatedDescription = useMemo(() => getTranslatedDescription(), [project.description, project.description_key, project.description_en, language, t])
   
   // Processar media_url (pode ser string ou array)
   const mediaUrls = useMemo(() => {
@@ -297,7 +324,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
       window.addEventListener('resize', checkHeight)
       return () => window.removeEventListener('resize', checkHeight)
     }
-  }, [descriptionRef, project.description, showFullDescription])
+  }, [descriptionRef, translatedDescription, showFullDescription])
 
   const isExpanded = showFullDescription || showAllTechnologies
 
@@ -327,13 +354,18 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           />
         ) : (
           <>
+            {/* Área clicável para abrir popup */}
+            <div
+              className="absolute inset-0 w-full h-full cursor-pointer z-10"
+              onClick={() => setSelectedImageIndex(currentImageIndex)}
+            />
             {/* Carrossel de imagens */}
             {mediaUrls.map((url, idx) => (
               <motion.img
                 key={idx}
                 src={url}
                 alt={`${project.name} - ${idx + 1}`}
-                className="absolute inset-0 w-full h-full object-contain"
+                className="absolute inset-0 w-full h-full object-contain pointer-events-none"
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: currentImageIndex === idx ? 1 : 0,
@@ -345,7 +377,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
             
             {/* Indicadores de imagem */}
             {hasMultipleImages && (
-              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-10">
+              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-20 pointer-events-none">
                 {mediaUrls.map((_, idx) => (
                   <div
                     key={idx}
@@ -374,7 +406,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 !showFullDescription ? 'line-clamp-2' : ''
               }`}
             >
-              {project.description}
+              {translatedDescription}
             </p>
             {needsExpandButton && (
               <button
@@ -500,8 +532,207 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           )}
         </div>
       </div>
+
+      {/* Popup de imagem */}
+      {selectedImageIndex !== null && project.media_type === 'image' && (
+        <ImagePopup
+          images={mediaUrls}
+          currentIndex={selectedImageIndex}
+          projectName={project.name}
+          onClose={() => setSelectedImageIndex(null)}
+          onNext={() => setSelectedImageIndex((prev) => 
+            prev !== null ? (prev + 1) % mediaUrls.length : null
+          )}
+          onPrevious={() => setSelectedImageIndex((prev) => 
+            prev !== null ? (prev - 1 + mediaUrls.length) % mediaUrls.length : null
+          )}
+          onNavigateTo={(index) => setSelectedImageIndex(index)}
+          hasMultipleImages={hasMultipleImages}
+        />
+      )}
     </motion.div>
   )
+}
+
+interface ImagePopupProps {
+  images: string[]
+  currentIndex: number
+  projectName: string
+  onClose: () => void
+  onNext: () => void
+  onPrevious: () => void
+  onNavigateTo: (index: number) => void
+  hasMultipleImages: boolean
+}
+
+const ImagePopup = ({ 
+  images, 
+  currentIndex, 
+  projectName, 
+  onClose, 
+  onNext, 
+  onPrevious,
+  onNavigateTo,
+  hasMultipleImages 
+}: ImagePopupProps) => {
+  const [mounted, setMounted] = useState(false)
+
+  // Garantir que o portal só renderize no cliente
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
+  // Fechar com ESC
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', handleEscape)
+    // Prevenir scroll do body quando popup está aberto
+    document.body.style.overflow = 'hidden'
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'unset'
+    }
+  }, [onClose])
+
+  // Navegação com setas
+  useEffect(() => {
+    const handleArrowKeys = (e: KeyboardEvent) => {
+      if (hasMultipleImages) {
+        if (e.key === 'ArrowRight') {
+          onNext()
+        } else if (e.key === 'ArrowLeft') {
+          onPrevious()
+        }
+      }
+    }
+    document.addEventListener('keydown', handleArrowKeys)
+    
+    return () => {
+      document.removeEventListener('keydown', handleArrowKeys)
+    }
+  }, [hasMultipleImages, onNext, onPrevious])
+
+  if (!mounted) return null
+
+  const popupContent = (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      {/* Navegação esquerda - posicionada no popup principal */}
+      {hasMultipleImages && (
+        <div className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30">
+          <motion.button
+            onClick={(e) => {
+              e.stopPropagation()
+              onPrevious()
+            }}
+            className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md text-white border-2 border-white/40 shadow-2xl"
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Imagem anterior"
+          >
+            <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </motion.button>
+        </div>
+      )}
+
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="relative max-w-[95vw] max-h-[95vh] flex flex-col items-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Botão fechar */}
+        <motion.button
+          onClick={onClose}
+          className="absolute -top-12 sm:-top-14 right-0 sm:right-4 z-30 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md text-white border-2 border-white/40 shadow-2xl transition-all"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Fechar"
+        >
+          <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </motion.button>
+
+        {/* Imagem */}
+        <motion.img
+          key={currentIndex}
+          src={images[currentIndex]}
+          alt={`${projectName} - ${currentIndex + 1}`}
+          className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.div>
+
+      {/* Navegação direita - posicionada no popup principal */}
+      {hasMultipleImages && (
+        <div className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30">
+          <motion.button
+            onClick={(e) => {
+              e.stopPropagation()
+              onNext()
+            }}
+            className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md text-white border-2 border-white/40 shadow-2xl"
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Próxima imagem"
+          >
+            <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </motion.button>
+        </div>
+      )}
+
+      {/* Contador de imagens */}
+      {hasMultipleImages && (
+        <div className="absolute top-6 sm:top-8 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-full bg-black/70 backdrop-blur-md text-white text-sm font-medium border border-white/30 shadow-xl z-30">
+          {currentIndex + 1} / {images.length}
+        </div>
+      )}
+
+      {/* Indicadores de imagem */}
+      {hasMultipleImages && (
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-30">
+          {images.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={(e) => {
+                e.stopPropagation()
+                onNavigateTo(idx)
+              }}
+              className={`h-2.5 rounded-full transition-all ${
+                currentIndex === idx 
+                  ? 'bg-white w-10 shadow-lg' 
+                  : 'bg-white/40 w-2.5 hover:bg-white/60'
+              }`}
+              aria-label={`Ir para imagem ${idx + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </motion.div>
+  )
+
+  return createPortal(popupContent, document.body)
 }
 
 export default Projects

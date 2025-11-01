@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS projects (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
+  description_key VARCHAR(255) COMMENT 'Chave para tradução da descrição (ex: projects.lembretes.description)',
+  description_en TEXT COMMENT 'Descrição em inglês (alternativa ao description_key)',
   media_url TEXT NOT NULL COMMENT 'Pode ser URL única ou JSON array ["url1", "url2"]',
   media_type ENUM('image', 'video') DEFAULT 'image',
   test_link VARCHAR(500),
@@ -21,7 +23,8 @@ CREATE TABLE IF NOT EXISTS projects (
 
 -- Dados de exemplo (você pode adaptar com seus projetos reais)
 -- Note: O campo technologies pode ser NULL ou um JSON array como: '["React", "Node.js", "MySQL"]'
-INSERT INTO projects (name, description, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) VALUES
-('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', '["React", "TypeScript", "Tailwind CSS"]', 1)
+-- Use description_key para usar o sistema de tradução ou description_en para tradução direta
+INSERT INTO projects (name, description, description_key, description_en, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) VALUES
+('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', 'projects.lembretes.description', 'Simple application for task organization and reminders.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', '["React", "TypeScript", "Tailwind CSS"]', 1)
 
 

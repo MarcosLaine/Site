@@ -182,6 +182,14 @@ const Carousel = ({ title, projects, delay }: CarouselProps) => {
           <ProjectCard key={index} project={project} index={index} />
         ))}
       </div>
+      
+      {/* Observação sobre clique nas imagens */}
+      {projects.some(p => p.media_type === 'image') && (
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 px-1 italic flex items-center gap-1">
+          <span>*</span>
+          <span>Clique na imagem para visualizá-la em tamanho maior</span>
+        </p>
+      )}
     </motion.div>
   )
 }

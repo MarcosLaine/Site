@@ -27,8 +27,8 @@ const translations = {
     
     // About
     'about.title': 'Sobre Mim',
-    'about.text1': 'Me chamo Marcos Paulo Laine e estou no 5º período de Ciência da Computação. Busco desenvolver minha carreira em tecnologia com curiosidade, responsabilidade e vontade de aprender.',
-    'about.text2': 'Na DTI Digital atuo como QA para a empresa norte-americana ADI Global, consolidando práticas de testes manuais, exploração, API e pipelines.',
+    'about.text1': 'Me chamo Marcos Paulo Laine e atualmente atuo como QA Lead na DTI Digital, alocado na ADI Global. Dedico-me ao desenvolvimento de soluções de qualidade em tecnologia, aplicando testes manuais e implementando automações de front-end mobile com foco em excelência e inovação.',
+    'about.text2': 'Na DTI Digital, lidero iniciativas de qualidade para a empresa norte-americana ADI Global, consolidando práticas de testes manuais, automações de front-end mobile, exploração, API e pipelines, garantindo a excelência e confiabilidade das soluções desenvolvidas.',
     
     // Projects
     'projects.title': 'Projetos',
@@ -91,8 +91,8 @@ const translations = {
     
     // About
     'about.title': 'About Me',
-    'about.text1': 'My name is Marcos Paulo Laine and I am in the 5th semester of Computer Science. I seek to develop my career in technology with curiosity, responsibility and willingness to learn.',
-    'about.text2': 'At DTI Digital I work as QA for the North American company ADI Global, consolidating practices of manual testing, exploration, API and pipelines.',
+    'about.text1': 'My name is Marcos Paulo Laine and I currently work as QA Lead at DTI Digital, assigned to ADI Global. I dedicate myself to developing quality technology solutions, applying manual testing and implementing front-end mobile automation with focus on excellence and innovation.',
+    'about.text2': 'At DTI Digital, I lead quality initiatives for the North American company ADI Global, consolidating practices of manual testing, front-end mobile automation, exploration, API and pipelines, ensuring excellence and reliability of developed solutions.',
     
     // Projects
     'projects.title': 'Projects',

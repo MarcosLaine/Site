@@ -266,9 +266,10 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     return []
   }, [project.technologies])
 
-  // Limitar tecnologias visíveis inicialmente (máximo 2 linhas de balões - 1)
-  // Assumindo ~5-6 balões por linha no card de 280-380px, então 2 linhas - 1 = ~9 balões
-  const MAX_TECHNOLOGIES_VISIBLE = 9
+  // Limitar tecnologias visíveis inicialmente (máximo 2 linhas de balões)
+  // Assumindo ~5-6 balões por linha no card de 280-380px, então 2 linhas = ~10-12 balões
+  // Usando um valor mais conservador (8) para garantir que caiba em 2 linhas em todos os tamanhos
+  const MAX_TECHNOLOGIES_VISIBLE = 8
   // Mostrar todas as tecnologias se explicitamente expandido (independente da descrição)
   const visibleTechnologies = showAllTechnologies 
     ? technologiesList 
@@ -450,7 +451,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                     Tech:
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-1 w-full">
+                <div className={`flex flex-wrap gap-1 w-full ${!showAllTechnologies ? 'max-h-[3.5rem] overflow-hidden' : ''}`}>
                   {visibleTechnologies.map((tech, idx) => (
                     <span
                       key={idx}
@@ -524,7 +525,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="hidden sm:inline">🚀 </span>Teste
+              <span className="hidden sm:inline">🚀 </span>{t('projects.testButton')}
             </motion.a>
           )}
           {project.github_link && !project.is_github_private && (

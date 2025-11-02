@@ -64,7 +64,7 @@ const translations = {
     'knowledge.engineering': 'Eng. de Software',
     'knowledge.cyber': 'Cybersegurança',
     'knowledge.mobileTest': 'Teste Mobile',
-    'knowledge.systems': 'Curioso por Sistemas',
+    'knowledge.systems': 'Hacking Ético',
     
     // Contact
     'contact.title': 'Contato',
@@ -128,7 +128,7 @@ const translations = {
     'knowledge.engineering': 'Software Engineering',
     'knowledge.cyber': 'Cybersecurity',
     'knowledge.mobileTest': 'Mobile Testing',
-    'knowledge.systems': 'Systems Enthusiast',
+    'knowledge.systems': 'Ethical Hacking',
     
     // Contact
     'contact.title': 'Contact',

@@ -32,8 +32,8 @@ const translations = {
     
     // Projects
     'projects.title': 'Projetos',
-    'projects.lead': 'Alguns projetos acadêmicos e pessoais — páginas web, jogos simples, ferramentas de investimento e automações.',
-    'projects.carousel1.title': 'Front-end / Jogos / Utilitários',
+    'projects.lead': 'Alguns projetos acadêmicos e pessoais — aplicativos mobile, páginas web, sistemas e automações.',
+    'projects.carousel1.title': 'Web / Front-end',
     'projects.carousel2.title': 'Mercado / Relatórios',
     'projects.imageClickHint': 'Clique na imagem para visualizá-la em tamanho maior',
     'projects.testButton': 'Teste',
@@ -96,8 +96,8 @@ const translations = {
     
     // Projects
     'projects.title': 'Projects',
-    'projects.lead': 'Some academic and personal projects — web pages, simple games, investment tools and automations.',
-    'projects.carousel1.title': 'Front-end / Games / Utilities',
+    'projects.lead': 'Some academic and personal projects — mobile apps, web pages, systems and automations.',
+    'projects.carousel1.title': 'Web / Front-end',
     'projects.carousel2.title': 'Market / Reports',
     'projects.imageClickHint': 'Click on the image to view it in full size',
     'projects.testButton': 'Test',

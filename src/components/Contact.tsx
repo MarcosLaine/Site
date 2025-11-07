@@ -19,9 +19,9 @@ const Contact = () => {
     },
     {
       name: 'Email',
-      url: 'mailto:marcospslaine@gmail.com',
+      url: 'mailto:contato@marcoslaine.com',
       icon: '/img/contact/Gmail.png',
-      handle: 'marcospslaine@gmail.com'
+      handle: 'contato@marcoslaine.com'
     }
   ]
 

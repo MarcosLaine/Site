@@ -59,7 +59,7 @@ const Hero = () => {
               </motion.a>
 
               <motion.a
-                href="mailto:marcospslaine@gmail.com"
+                href="mailto:contato@marcoslaine.com"
                 className="px-6 sm:px-8 py-3 text-center rounded-xl border-2 border-primary-500/50 backdrop-blur-sm hover:bg-primary-500/10 font-semibold transition-all"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}

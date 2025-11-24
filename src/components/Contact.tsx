@@ -61,7 +61,7 @@ const Contact = () => {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="w-full h-full rounded-full bg-white dark:bg-slate-900 flex items-center justify-center">
-                    <img src={social.icon} alt={social.name} className="w-7 h-7 sm:w-8 sm:h-8" />
+                    <img src={social.icon} alt={social.name} className="w-7 h-7 sm:w-8 sm:h-8" loading="lazy" decoding="async" />
                   </div>
                 </motion.div>
                 <div className="text-center">

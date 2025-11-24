@@ -376,6 +376,8 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 src={url}
                 alt={`${project.name} - ${idx + 1}`}
                 className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+                loading={idx === 0 ? "eager" : "lazy"}
+                decoding="async"
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: currentImageIndex === idx ? 1 : 0,
@@ -685,6 +687,8 @@ const ImagePopup = ({
           src={images[currentIndex]}
           alt={`${projectName} - ${currentIndex + 1}`}
           className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+          loading="eager"
+          decoding="async"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}

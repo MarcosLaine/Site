@@ -73,7 +73,7 @@ const Skills = () => {
                 transition={{ delay: index * 0.03 }}
                 whileHover={{ scale: 1.1, y: -5 }}
               >
-                <img src={skill.icon} alt={skill.name} className="w-4 h-4 sm:w-5 sm:h-5 object-contain" />
+                <img src={skill.icon} alt={skill.name} className="w-4 h-4 sm:w-5 sm:h-5 object-contain" loading="lazy" decoding="async" />
                 <span className="text-xs sm:text-sm font-medium text-slate-900">{skill.name}</span>
               </motion.div>
             ))}
@@ -100,7 +100,7 @@ const Skills = () => {
                 transition={{ delay: index * 0.03 }}
                 whileHover={{ scale: 1.1, y: -5 }}
               >
-                <img src={item.icon} alt={item.name} className="w-4 h-4 sm:w-5 sm:h-5 object-contain" />
+                <img src={item.icon} alt={item.name} className="w-4 h-4 sm:w-5 sm:h-5 object-contain" loading="lazy" decoding="async" />
                 <span className="text-xs sm:text-sm font-medium text-slate-900">{item.name}</span>
               </motion.div>
             ))}

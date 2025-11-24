@@ -8,7 +8,38 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false
-  }
+    sourcemap: false,
+    // Otimizações de build
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.log em produção
+        drop_debugger: true,
+      },
+    },
+    // Chunking otimizado
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'framer-motion': ['framer-motion'],
+        },
+        // Otimização de nomes de arquivos
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      },
+    },
+    // Limite de aviso de tamanho
+    chunkSizeWarningLimit: 1000,
+  },
+  // Otimizações de servidor
+  server: {
+    compress: true,
+  },
+  // Preview também com compressão
+  preview: {
+    compress: true,
+  },
 })
 

@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { projectsAPI } from '../services/api'
+import { OptimizedImage } from './OptimizedImage'
 
 interface Project {
   id: number
@@ -369,15 +370,15 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               className="absolute inset-0 w-full h-full cursor-pointer z-10"
               onClick={() => setSelectedImageIndex(currentImageIndex)}
             />
-            {/* Carrossel de imagens */}
+            {/* Carrossel de imagens - apenas a imagem atual é carregada */}
             {mediaUrls.map((url, idx) => (
-              <motion.img
+              <OptimizedImage
                 key={idx}
                 src={url}
                 alt={`${project.name} - ${idx + 1}`}
                 className="absolute inset-0 w-full h-full object-contain pointer-events-none"
                 loading={idx === 0 ? "eager" : "lazy"}
-                decoding="async"
+                priority={idx === 0}
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: currentImageIndex === idx ? 1 : 0,
@@ -682,16 +683,15 @@ const ImagePopup = ({
         </motion.button>
 
         {/* Imagem */}
-        <motion.img
+        <OptimizedImage
           key={currentIndex}
           src={images[currentIndex]}
           alt={`${projectName} - ${currentIndex + 1}`}
           className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
           loading="eager"
-          decoding="async"
+          priority={true}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.3 }}
         />
       </motion.div>

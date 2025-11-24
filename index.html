@@ -15,22 +15,11 @@
   <meta name="robots" content="index, follow">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
+  <!-- X-Frame-Options removido: deve ser definido apenas via HTTP header (já configurado em _headers) -->
   
   <!-- Content Security Policy - Otimizada para performance -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval';
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    font-src 'self' https://fonts.gstatic.com;
-    img-src 'self' data: https:;
-    connect-src 'self' https://api.github.com;
-    frame-ancestors 'none';
-    upgrade-insecure-requests;
-  ">
-  
-  <!-- Preload crítico -->
-  <link rel="preload" href="/img/icon/Logo-Marcos.png" as="image">
+  <!-- frame-ancestors não funciona em meta tags, apenas em HTTP headers (já configurado em _headers) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://site-yor6.onrender.com http://localhost:3001; upgrade-insecure-requests;">
 </head>
 <body>
   <div id="root"></div>

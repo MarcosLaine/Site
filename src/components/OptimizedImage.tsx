@@ -98,8 +98,9 @@ export const OptimizedImage = ({
   // Para animações, sempre renderizar o elemento para que o Intersection Observer funcione
   if (initial || animate || transition) {
     // Para imagens com animação, sempre renderizar, mas carregar apenas quando shouldLoad for true
+    // Usar fragmento para não adicionar wrapper que afeta o layout
     return (
-      <div className="relative">
+      <>
         {!isLoaded && !error && shouldLoad && (
           <div className={`${className} bg-slate-200 dark:bg-slate-700 animate-pulse absolute inset-0 z-0`} />
         )}
@@ -120,12 +121,8 @@ export const OptimizedImage = ({
           initial={initial}
           animate={animate}
           transition={transition}
-          style={{ 
-            position: 'relative',
-            zIndex: 1
-          }}
         />
-      </div>
+      </>
     )
   }
 

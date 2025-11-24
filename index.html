@@ -17,9 +17,8 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <!-- X-Frame-Options removido: deve ser definido apenas via HTTP header (já configurado em _headers) -->
   
-  <!-- Content Security Policy - Otimizada para performance -->
-  <!-- frame-ancestors não funciona em meta tags, apenas em HTTP headers (já configurado em _headers) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://site-yor6.onrender.com http://localhost:3001; upgrade-insecure-requests;">
+  <!-- Content Security Policy removida da meta tag - usando apenas via HTTP headers (_headers) -->
+  <!-- Isso evita conflitos e permite melhor controle de CORS -->
 </head>
 <body>
   <div id="root"></div>

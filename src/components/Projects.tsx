@@ -370,7 +370,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               className="absolute inset-0 w-full h-full cursor-pointer z-10"
               onClick={() => setSelectedImageIndex(currentImageIndex)}
             />
-            {/* Carrossel de imagens - apenas a imagem atual é carregada */}
+            {/* Carrossel de imagens - primeira imagem carrega imediatamente, demais com lazy */}
             {mediaUrls.map((url, idx) => (
               <OptimizedImage
                 key={idx}

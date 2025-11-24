@@ -31,12 +31,20 @@ export const OptimizedImage = ({
   transition,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [shouldLoad, setShouldLoad] = useState(priority || loading === 'eager')
+  // Se priority ou eager, sempre carregar imediatamente
+  const shouldLoadImmediately = priority || loading === 'eager'
+  const [shouldLoad, setShouldLoad] = useState(shouldLoadImmediately)
   const [error, setError] = useState(false)
   const imgRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
-    // Se já deve carregar (priority ou eager), não precisa do observer
+    // Se já deve carregar imediatamente (priority ou eager), sempre carregar
+    if (shouldLoadImmediately) {
+      setShouldLoad(true)
+      return
+    }
+
+    // Para lazy loading, usar Intersection Observer apenas se ainda não carregou
     if (shouldLoad) return
 
     const observer = new IntersectionObserver(
@@ -49,18 +57,22 @@ export const OptimizedImage = ({
         })
       },
       {
-        rootMargin: '50px', // Começa a carregar 50px antes de entrar na viewport
+        rootMargin: '100px', // Começa a carregar 100px antes de entrar na viewport
       }
     )
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current)
-    }
+    // Usar um timeout pequeno para garantir que o elemento está no DOM
+    const timeoutId = setTimeout(() => {
+      if (imgRef.current) {
+        observer.observe(imgRef.current)
+      }
+    }, 0)
 
     return () => {
+      clearTimeout(timeoutId)
       observer.disconnect()
     }
-  }, [shouldLoad])
+  }, [shouldLoad, shouldLoadImmediately])
 
   const handleLoad = () => {
     setIsLoaded(true)
@@ -83,26 +95,36 @@ export const OptimizedImage = ({
   }
 
   // Se houver props de animação do framer-motion, usar motion.img
+  // Para animações, sempre renderizar o elemento para que o Intersection Observer funcione
   if (initial || animate || transition) {
+    // Para imagens com animação, sempre renderizar, mas carregar apenas quando shouldLoad for true
     return (
       <div className="relative">
         {!isLoaded && !error && shouldLoad && (
-          <div className={`${className} bg-slate-200 dark:bg-slate-700 animate-pulse absolute inset-0`} />
+          <div className={`${className} bg-slate-200 dark:bg-slate-700 animate-pulse absolute inset-0 z-0`} />
         )}
         {error && (
-          <div className={`${className} bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400 text-xs`}>
+          <div className={`${className} bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400 text-xs absolute inset-0 z-10`}>
             Erro ao carregar
           </div>
         )}
-        {shouldLoad && (
-          <motion.img
-            {...imageProps}
-            initial={initial}
-            animate={animate}
-            transition={transition}
-            style={{ ...(isLoaded ? {} : { opacity: 0 }) }}
-          />
-        )}
+        <motion.img
+          ref={imgRef}
+          src={shouldLoad ? src : undefined}
+          alt={alt}
+          className={className}
+          loading={shouldLoadImmediately ? 'eager' : loading}
+          decoding="async"
+          onLoad={handleLoad}
+          onError={handleError}
+          initial={initial}
+          animate={animate}
+          transition={transition}
+          style={{ 
+            position: 'relative',
+            zIndex: 1
+          }}
+        />
       </div>
     )
   }

@@ -9,14 +9,8 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
-    // Otimizações de build
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.log em produção
-        drop_debugger: true,
-      },
-    },
+    // Otimizações de build - usando esbuild (mais rápido que terser)
+    minify: 'esbuild',
     // Chunking otimizado
     rollupOptions: {
       output: {

@@ -12,152 +12,8 @@ import {
   parseTechnologies,
 } from '../utils/projectHelpers'
 
-type FallbackProject = Pick<
-  Project,
-  'id' | 'name' | 'media_url' | 'description_key' | 'description' | 'description_en'
-> & {
-  technologies?: string[]
-  test_link?: string
-  github_link?: string
-  is_github_private?: boolean
-  category?: string
-  media_type?: 'image' | 'video'
-  index?: number
-  order_index?: number
-}
-
-const FALLBACK_PROJECTS: FallbackProject[] = [
-  {
-    id: 1,
-    name: 'Lembretes',
-    description: '',
-    media_url: JSON.stringify(['/img/carousel1/Lembretes1.png', '/img/carousel1/Lembretes2.png']),
-    description_key: 'projects.lembretes.description',
-    github_link: 'https://github.com/marcoslaine/lembretes',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS'],
-    category: 'frontend',
-    index: 1,
-  },
-  {
-    id: 2,
-    name: 'Prob. Poker',
-    description: '',
-    media_url: '/img/carousel1/Poker.png',
-    description_key: 'projects.poker.description',
-    category: 'frontend',
-    index: 2,
-  },
-  {
-    id: 3,
-    name: 'Financiart',
-    description: '',
-    media_url: '/img/carousel1/financiart.png',
-    description_key: 'projects.financiart.description',
-    category: 'frontend',
-    index: 3,
-  },
-  {
-    id: 4,
-    name: 'Memória',
-    description: '',
-    media_url: '/img/carousel1/memoria.png',
-    description_key: 'projects.memoria.description',
-    category: 'frontend',
-    index: 4,
-  },
-  {
-    id: 5,
-    name: 'Tic-Tac-Toe',
-    description: '',
-    media_url: '/img/carousel1/tictactoe.png',
-    description_key: 'projects.tictactoe.description',
-    category: 'frontend',
-    index: 5,
-  },
-  {
-    id: 6,
-    name: 'Controle SE',
-    description: '',
-    media_url: JSON.stringify([
-      '/img/carousel1/controle-se1.png',
-      '/img/carousel1/controle-se2.png',
-      '/img/carousel1/controle-se3.png',
-    ]),
-    category: 'frontend',
-    index: 6,
-  },
-  {
-    id: 7,
-    name: 'Habitus',
-    description: '',
-    media_url: JSON.stringify([
-      '/img/carousel1/Habitus1.jpeg',
-      '/img/carousel1/Habitus2.jpeg',
-      '/img/carousel1/Habitus3.jpeg',
-      '/img/carousel1/Habitus4.jpeg',
-      '/img/carousel1/Habitus5.jpeg',
-      '/img/carousel1/Habitus6.jpeg',
-    ]),
-    category: 'mobile',
-    index: 7,
-  },
-  {
-    id: 8,
-    name: 'Advofind',
-    description: '',
-    media_url: JSON.stringify([
-      '/img/carousel1/Advofind1.jpeg',
-      '/img/carousel1/Advofind2.jpeg',
-      '/img/carousel1/Advofind3.jpeg',
-    ]),
-    category: 'mobile',
-    index: 8,
-  },
-  {
-    id: 9,
-    name: 'Quanto deu a conta?',
-    description: '',
-    media_url: JSON.stringify([
-      '/img/carousel1/Quanto-deu-a-conta1.jpeg',
-      '/img/carousel1/Quanto-deu-a-conta2.jpeg',
-      '/img/carousel1/Quanto-deu-a-conta3.jpeg',
-      '/img/carousel1/Quanto-deu-a-conta4.jpeg',
-      '/img/carousel1/Quanto-deu-a-conta5.jpeg',
-      '/img/carousel1/Quanto-deu-a-conta6.jpeg',
-    ]),
-    category: 'mobile',
-    index: 9,
-  },
-  {
-    id: 10,
-    name: 'Crypto Bot',
-    description: '',
-    media_url: '/img/carousel1/cryptobot.png',
-    category: 'mercado',
-    index: 10,
-  },
-  {
-    id: 11,
-    name: 'Backtesting',
-    description: '',
-    media_url: '/img/carousel2/Backtesting.png',
-    description_key: 'projects.backtesting.description',
-    category: 'mercado',
-    index: 11,
-  },
-  {
-    id: 12,
-    name: 'Relatório de Mercado',
-    description: '',
-    media_url: '/img/carousel2/Relatório_mercado.png',
-    description_key: 'projects.market.description',
-    category: 'mercado',
-    index: 12,
-  },
-]
-
 function toProjectDetail(
-  project: Project | FallbackProject,
+  project: Project,
   t: (key: string) => string,
   language: string,
   categoryLabel?: string
@@ -166,14 +22,12 @@ function toProjectDetail(
     id: project.id,
     name: project.name,
     description: getProjectDescription(project, t, language),
-    imageUrls: parseMediaUrls(project.media_url as string),
-    mediaType: ('media_type' in project && project.media_type) || 'image',
-    technologies: parseTechnologies(
-      'technologies' in project ? project.technologies : undefined
-    ),
-    testLink: 'test_link' in project ? project.test_link : undefined,
-    githubLink: 'github_link' in project ? project.github_link : undefined,
-    isGithubPrivate: 'is_github_private' in project ? project.is_github_private : false,
+    imageUrls: parseMediaUrls(project.media_url),
+    mediaType: project.media_type || 'image',
+    technologies: parseTechnologies(project.technologies),
+    testLink: project.test_link,
+    githubLink: project.github_link,
+    isGithubPrivate: Boolean(project.is_github_private),
     category: categoryLabel,
   }
 }
@@ -188,23 +42,6 @@ function sortProjects<T extends { index?: number; order_index?: number; id: numb
   list: T[]
 ): T[] {
   return [...list].sort((a, b) => getDisplayIndex(a) - getDisplayIndex(b))
-}
-
-function mergeWithFallback(apiProjects: Project[], fallback: FallbackProject[]): (Project | FallbackProject)[] {
-  if (apiProjects.length === 0) return fallback
-
-  const apiByName = new Map(apiProjects.map((p) => [p.name.toLowerCase(), p]))
-  const merged: (Project | FallbackProject)[] = fallback.map((fb) => {
-    const fromApi = apiByName.get(fb.name.toLowerCase())
-    if (fromApi) {
-      apiByName.delete(fb.name.toLowerCase())
-      return fromApi
-    }
-    return fb
-  })
-
-  merged.push(...apiByName.values())
-  return merged
 }
 
 /** Repassa o scroll da roda/touch para a página ao chegar no topo ou fim do grid. */
@@ -267,13 +104,10 @@ const HeroScroll = () => {
   )
 
   const showcaseProjects = useMemo((): ProjectDetailData[] => {
-    const source = sortProjects(mergeWithFallback(projects, FALLBACK_PROJECTS))
-
-    return source.map((project) => {
-      const category =
-        'category' in project && project.category
-          ? categoryNames[project.category] || project.category
-          : undefined
+    return sortProjects(projects).map((project) => {
+      const category = project.category
+        ? categoryNames[project.category] || project.category
+        : undefined
       return toProjectDetail(project, t, language, category)
     })
   }, [projects, t, language, categoryNames])

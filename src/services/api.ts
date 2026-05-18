@@ -13,7 +13,9 @@ export interface Project {
   is_github_private: boolean;
   category: string;
   technologies?: string | string[]; // JSON string ou array de tecnologias
-  order_index: number;
+  /** Posição no grid (1 = primeiro). Antigo: order_index */
+  index: number;
+  order_index?: number;
   is_active: boolean;
   created_at: string;
   updated_at: string;

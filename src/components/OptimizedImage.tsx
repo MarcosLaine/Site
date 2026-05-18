@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface OptimizedImageProps {
   src: string
@@ -102,7 +103,7 @@ export const OptimizedImage = ({
     return (
       <>
         {!isLoaded && !error && shouldLoad && (
-          <div className={`${className} bg-slate-200 dark:bg-slate-700 animate-pulse absolute inset-0 z-0`} />
+          <Skeleton className={`${className} absolute inset-0 z-0 rounded-[inherit]`} />
         )}
         {error && (
           <div className={`${className} bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400 text-xs absolute inset-0 z-10`}>
@@ -129,7 +130,7 @@ export const OptimizedImage = ({
   return (
     <div className="relative">
       {!isLoaded && !error && shouldLoad && (
-        <div className={`${className} bg-slate-200 dark:bg-slate-700 animate-pulse absolute inset-0`} />
+        <Skeleton className={`${className} absolute inset-0 rounded-[inherit]`} />
       )}
       {error && (
         <div className={`${className} bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400 text-xs`}>

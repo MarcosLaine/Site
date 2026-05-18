@@ -3,6 +3,17 @@ import pool from '../config/database.js';
 
 const router = express.Router();
 
+/** Posição no grid: aceita `index` ou `order_index` (legado) no body */
+function resolveDisplayIndex(body, defaultValue = 0) {
+  if (body.index !== undefined && body.index !== null) {
+    return Number(body.index);
+  }
+  if (body.order_index !== undefined && body.order_index !== null) {
+    return Number(body.order_index);
+  }
+  return defaultValue;
+}
+
 // Middleware para verificar API Key (para operações de escrita)
 const checkApiKey = (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
@@ -27,7 +38,7 @@ router.get('/', async (req, res) => {
       params.push(category);
     }
     
-    query += ' ORDER BY order_index ASC, created_at DESC';
+    query += ' ORDER BY `index` ASC, created_at DESC';
     
     const [projects] = await pool.execute(query, params);
     
@@ -90,8 +101,9 @@ router.post('/', checkApiKey, async (req, res) => {
       is_github_private = false,
       category = 'geral',
       technologies,
-      order_index = 0
     } = req.body;
+
+    const displayIndex = resolveDisplayIndex(req.body, 0);
     
     // Validações
     if (!name || !description || !media_url) {
@@ -108,9 +120,9 @@ router.post('/', checkApiKey, async (req, res) => {
 
     const [result] = await pool.execute(
       `INSERT INTO projects 
-      (name, description, description_key, description_en, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) 
+      (name, description, description_key, description_en, media_url, media_type, test_link, github_link, is_github_private, category, technologies, \`index\`) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [name, description, description_key || null, description_en || null, media_url, media_type, test_link, github_link, is_github_private, category, technologiesJson, order_index]
+      [name, description, description_key || null, description_en || null, media_url, media_type, test_link, github_link, is_github_private, category, technologiesJson, displayIndex]
     );
     
     res.status(201).json({
@@ -128,7 +140,7 @@ router.post('/', checkApiKey, async (req, res) => {
         is_github_private,
         category,
         technologies: technologiesJson,
-        order_index
+        index: displayIndex,
       },
       message: 'Projeto criado com sucesso'
     });
@@ -157,9 +169,13 @@ router.put('/:id', checkApiKey, async (req, res) => {
       is_github_private,
       category,
       technologies,
+      index: bodyIndex,
       order_index,
       is_active
     } = req.body;
+
+    const displayIndex =
+      bodyIndex !== undefined ? bodyIndex : order_index !== undefined ? order_index : undefined;
     
     const fields = [];
     const values = [];
@@ -179,7 +195,10 @@ router.put('/:id', checkApiKey, async (req, res) => {
       fields.push('technologies = ?'); 
       values.push(technologiesJson); 
     }
-    if (order_index !== undefined) { fields.push('order_index = ?'); values.push(order_index); }
+    if (displayIndex !== undefined) {
+      fields.push('`index` = ?');
+      values.push(Number(displayIndex));
+    }
     if (is_active !== undefined) { fields.push('is_active = ?'); values.push(is_active); }
     
     if (fields.length === 0) {

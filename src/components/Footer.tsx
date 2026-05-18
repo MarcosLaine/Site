@@ -13,7 +13,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 px-4">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-neutral-500 px-4">
             {t('footer.copyright')}
           </p>
           <motion.div

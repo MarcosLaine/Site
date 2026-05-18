@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ImageWithSkeleton } from './ui/ImageWithSkeleton'
 import { useLanguage } from '../context/LanguageContext'
 
 const About = () => {
@@ -26,10 +27,10 @@ const About = () => {
               transition={{ delay: 0.2 }}
               whileHover={{ scale: 1.02 }}
             >
-              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-800 dark:text-slate-300">
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-800 dark:text-neutral-300">
                 {t('about.text1')}
               </p>
-              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-800 dark:text-slate-300">
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-800 dark:text-neutral-300">
                 {t('about.text2')}
               </p>
             </motion.div>
@@ -45,9 +46,10 @@ const About = () => {
                 className="glass-light dark:glass p-4 sm:p-6 rounded-2xl shadow-xl"
                 whileHover={{ scale: 1.05, rotate: 2 }}
               >
-                <img
+                <ImageWithSkeleton
                   src="/img/about_me/adi-logo.jpeg"
                   alt="ADI Global"
+                  wrapperClassName="w-32 sm:w-40"
                   className="w-32 sm:w-40 h-auto rounded-lg"
                 />
               </motion.div>

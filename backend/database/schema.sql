@@ -12,19 +12,19 @@ CREATE TABLE IF NOT EXISTS projects (
   is_github_private BOOLEAN DEFAULT false,
   category VARCHAR(100) DEFAULT 'geral',
   technologies TEXT COMMENT 'JSON array de tecnologias ["React", "Node.js", "MySQL"]',
-  order_index INT DEFAULT 0,
+  `index` INT NOT NULL DEFAULT 0 COMMENT 'Número da posição de exibição no site (1 = primeiro)',
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX idx_category (category),
   INDEX idx_active (is_active),
-  INDEX idx_order (order_index)
+  INDEX idx_project_index (`index`)
 );
 
 -- Dados de exemplo (você pode adaptar com seus projetos reais)
 -- Note: O campo technologies pode ser NULL ou um JSON array como: '["React", "Node.js", "MySQL"]'
 -- Use description_key para usar o sistema de tradução ou description_en para tradução direta
-INSERT INTO projects (name, description, description_key, description_en, media_url, media_type, test_link, github_link, is_github_private, category, technologies, order_index) VALUES
+INSERT INTO projects (name, description, description_key, description_en, media_url, media_type, test_link, github_link, is_github_private, category, technologies, `index`) VALUES
 ('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', 'projects.lembretes.description', 'Simple application for task organization and reminders.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', '["React", "TypeScript", "Tailwind CSS"]', 1)
 
 

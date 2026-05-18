@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { HoverButton } from '@/components/ui/hover-button'
+import SkyToggle from '@/components/ui/sky-toggle'
 import { useLanguage } from '../context/LanguageContext'
 
 interface NavbarProps {
@@ -23,10 +25,10 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
       } shadow-lg`}
     >
       <nav className="container mx-auto px-3 sm:px-6 lg:px-8 py-3">
-        <div className="flex items-center justify-between">
+        <motion.div className="flex items-center justify-between gap-4">
           <motion.a
             href="#top"
-            className="text-xl sm:text-2xl font-bold"
+            className="text-xl sm:text-2xl font-bold shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -36,68 +38,45 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
             <span className="text-gradient">Laine</span>
           </motion.a>
 
-          <div className="flex items-center gap-1.5 sm:gap-3">
-            <div className="hidden md:flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-1.5">
               {['about', 'projects', 'skills', 'contact'].map((item) => (
-                <motion.a
-                  key={item}
-                  href={`#${item}`}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    theme === 'dark'
-                      ? 'hover:bg-white/10 text-slate-200'
-                      : 'hover:bg-slate-200/50 text-slate-700'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                <HoverButton key={item} href={`#${item}`} variant="nav">
                   {t(`nav.${item}`)}
-                </motion.a>
+                </HoverButton>
               ))}
             </div>
 
-            <motion.button
+            <HoverButton
+              type="button"
+              variant="compact"
               onClick={toggleLanguage}
-              className={`px-2 sm:px-3 py-2 text-sm sm:text-base rounded-lg border transition-colors ${
-                theme === 'dark'
-                  ? 'border-white/20 hover:bg-white/10'
-                  : 'border-slate-300 hover:bg-slate-200/50'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               aria-label="Toggle language"
             >
-              <span className="hidden xs:inline">🌐 </span>{language.toUpperCase()}
-            </motion.button>
+              <span className="hidden xs:inline">🌐 </span>
+              {language.toUpperCase()}
+            </HoverButton>
 
-            <motion.button
-              onClick={toggleTheme}
-              className={`px-2 sm:px-3 py-2 rounded-lg border transition-colors ${
-                theme === 'dark'
-                  ? 'border-white/20 hover:bg-white/10'
-                  : 'border-slate-300 hover:bg-slate-200/50'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <SkyToggle
+              size="sm"
+              checked={theme === 'dark'}
+              onCheckedChange={() => toggleTheme()}
               aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? '🌞' : '🌙'}
-            </motion.button>
+            />
 
-            <motion.a
+            <HoverButton
               href={`/docs/Marcos_Laine_QA_${language.toUpperCase()}.pdf`}
               download
-              className="hidden xs:flex px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              variant="navbar"
+              className="hidden xs:inline-flex"
             >
               📄 <span className="hidden sm:inline ml-1">{t('nav.downloadCV')}</span>
-            </motion.a>
+            </HoverButton>
           </div>
-        </div>
+        </motion.div>
       </nav>
     </motion.header>
   )
 }
 
 export default Navbar
-

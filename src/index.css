@@ -7,33 +7,32 @@
     scroll-behavior: smooth;
   }
   
-  /* Tema padrão: DARK */
+  /* Tema padrão: preto elegante */
   body {
-    @apply bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-slate-100;
+    @apply bg-gradient-to-b from-black via-neutral-950 to-zinc-950 text-neutral-100;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   }
 
-  /* Tema claro (apenas quando ativado) */
   body.light {
-    @apply bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-slate-900;
+    @apply bg-gradient-to-br from-neutral-50 via-stone-100 to-neutral-100 text-neutral-900;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.45)];
   }
-  
+
   .glass-light {
-    @apply bg-white/80 backdrop-blur-md border border-slate-300/60 shadow-sm;
+    @apply bg-white/85 backdrop-blur-md border border-neutral-200/80 shadow-sm;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-amber-200/95 via-neutral-100 to-amber-100/90 bg-clip-text text-transparent;
   }
 
   body.light .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 via-blue-600 to-primary-700 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-amber-700 via-neutral-800 to-amber-800 bg-clip-text text-transparent;
   }
 }
 
@@ -44,19 +43,19 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-900/50;
+  @apply bg-neutral-950/80;
 }
 
 body.light ::-webkit-scrollbar-track {
-  @apply bg-slate-200/50;
+  @apply bg-neutral-200/50;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary-500/50 rounded-full hover:bg-primary-500/70;
+  @apply bg-amber-600/40 rounded-full hover:bg-amber-500/55;
 }
 
 body.light ::-webkit-scrollbar-thumb {
-  @apply bg-primary-600/50 hover:bg-primary-600/70;
+  @apply bg-neutral-400/50 hover:bg-neutral-500/60;
 }
 
 /* Scrollbar fina para containers pequenos */
@@ -70,10 +69,60 @@ body.light ::-webkit-scrollbar-thumb {
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  @apply bg-primary-500/30 rounded-full hover:bg-primary-500/50;
+  @apply bg-amber-600/30 rounded-full hover:bg-amber-500/45;
 }
 
 body.light .scrollbar-thin::-webkit-scrollbar-thumb {
-  @apply bg-primary-600/30 hover:bg-primary-600/50;
+  @apply bg-neutral-400/30 hover:bg-neutral-500/50;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(203 213 225 / 0.45) 0%,
+    rgb(226 232 240 / 0.9) 50%,
+    rgb(203 213 225 / 0.45) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+body.dark .skeleton-shimmer,
+body:not(.light) .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(23 23 23 / 0.5) 0%,
+    rgb(64 64 64 / 0.55) 50%,
+    rgb(23 23 23 / 0.5) 100%
+  );
+  background-size: 200% 100%;
+}
+
+body.light .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(226 232 240 / 0.8) 0%,
+    rgb(241 245 249 / 1) 50%,
+    rgb(226 232 240 / 0.8) 100%
+  );
+  background-size: 200% 100%;
 }
 

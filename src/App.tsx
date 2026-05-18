@@ -1,22 +1,26 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import About from './components/About'
-import BackgroundEffects from './components/BackgroundEffects'
+import PageSkeleton from './components/skeletons/PageSkeleton'
+import { usePageReady } from './hooks/usePageReady'
+import { DottedSurface } from '@/components/ui/dotted-surface'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
+import HeroScroll from './components/HeroScroll'
 import Navbar from './components/Navbar'
-import Projects from './components/Projects'
 import Skills from './components/Skills'
 import { LanguageProvider } from './context/LanguageContext'
 
 function App() {
+  const pageReady = usePageReady()
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     const saved = localStorage.getItem('theme')
     return (saved as 'dark' | 'light') || 'dark'  // Padrão: dark
   })
 
   useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
     document.body.classList.remove('dark', 'light')
     document.body.classList.add(theme)
     localStorage.setItem('theme', theme)
@@ -34,25 +38,33 @@ function App() {
   return (
     <LanguageProvider>
       <div className="min-h-screen relative overflow-hidden">
-        <BackgroundEffects />
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
+        <DottedSurface theme={theme} />
+        {pageReady && <Navbar theme={theme} toggleTheme={toggleTheme} />}
         
         <AnimatePresence mode="wait">
-          <motion.main
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Hero />
-            <About />
-            <Projects />
-            <Skills />
-            <Contact />
-          </motion.main>
+          {!pageReady ? (
+            <div className="relative z-10">
+              <PageSkeleton key="skeleton" />
+            </div>
+          ) : (
+            <motion.main
+              key="content"
+              className="relative z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Hero />
+              <HeroScroll />
+              <About />
+              <Skills />
+              <Contact />
+            </motion.main>
+          )}
         </AnimatePresence>
         
-        <Footer />
+        {pageReady && <Footer />}
       </div>
     </LanguageProvider>
   )

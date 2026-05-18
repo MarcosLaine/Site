@@ -20,10 +20,16 @@ const translations = {
     // Hero
     'hero.greeting': 'Olá, me chamo',
     'hero.name': 'Marcos Laine',
-    'hero.subtitle': 'Estudante de Ciência da Computação • Quality Assurance (QA)',
+    'hero.subtitle': 'Estudante de Engenharia de Software • Quality Assurance (QA)',
     'hero.description': 'Atualmente QA Lead atuando na DTI Digital, alocado na ADI Global, aplicando testes manuais implementando automações de front-end mobile.',
     'hero.viewProjects': 'Ver Projetos',
     'hero.contact': 'Fale Comigo',
+
+    // Showcase scroll
+    'showcase.lead': 'Conheça alguns dos meus',
+    'showcase.highlight': 'Projetos',
+    'showcase.subtitle': 'Aplicativos, páginas web, automações e ferramentas que desenvolvi.',
+    'showcase.viewAll': 'Ver todos os projetos',
     
     // About
     'about.title': 'Sobre Mim',
@@ -84,10 +90,17 @@ const translations = {
     // Hero
     'hero.greeting': 'Hello, my name is',
     'hero.name': 'Marcos Laine',
-    'hero.subtitle': 'Computer Science Student • Quality Assurance (QA)',
+    'hero.subtitle': 'Software Engineering Student • Quality Assurance (QA)',
     'hero.description': 'Currently QA Lead at DTI Digital, assigned to ADI Global, applying manual testing implementing automation of front-end mobile.',
     'hero.viewProjects': 'View Projects',
     'hero.contact': 'Contact Me',
+
+    // Showcase scroll
+    'showcase.lead': 'Explore some of my',
+    'showcase.highlight': 'Projects',
+    'showcase.subtitle': 'Apps, web pages, automations and tools I have built.',
+    'showcase.viewAll': 'View all projects',
+
     
     // About
     'about.title': 'About Me',

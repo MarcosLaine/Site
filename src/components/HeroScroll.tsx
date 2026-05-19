@@ -112,9 +112,13 @@ const HeroScroll = () => {
     })
   }, [projects, t, language, categoryNames])
 
+  const skeletonCount = 12
+  const projectsCount = loading ? skeletonCount : showcaseProjects.length
+
   return (
     <section id="projects" className="relative z-10 -mt-8 md:-mt-16">
       <ContainerScroll
+        projectsCount={projectsCount}
         titleComponent={
           <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-neutral-50">
             <span className="text-gradient">{t('projects.title')}</span>
@@ -134,7 +138,7 @@ const HeroScroll = () => {
             animate={{ opacity: 1 }}
           >
           {loading ? (
-            <ProjectsGridSkeleton count={12} />
+            <ProjectsGridSkeleton count={skeletonCount} />
           ) : (
             <motion.div
               className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 pb-2"

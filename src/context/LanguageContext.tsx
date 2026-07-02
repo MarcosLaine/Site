@@ -21,7 +21,7 @@ const translations = {
     'hero.greeting': 'Olá, me chamo',
     'hero.name': 'Marcos Laine',
     'hero.subtitle': 'Estudante de Engenharia de Software • Quality Assurance (QA)',
-    'hero.description': 'Atualmente QA Lead atuando na DTI Digital, alocado na ADI Global, aplicando testes manuais implementando automações de front-end mobile.',
+    'hero.description': 'Atualmente QA Lead na DTI Digital, alocado no projeto da ISN, liderando a iniciativa de IA do projeto piloto AI-first da DTI, com foco em automação, qualidade e orquestração de agentes de IA.',
     'hero.viewProjects': 'Ver Projetos',
     'hero.contact': 'Fale Comigo',
 
@@ -33,9 +33,32 @@ const translations = {
     
     // About
     'about.title': 'Sobre Mim',
-    'about.text1': 'Me chamo Marcos Paulo Laine e atualmente atuo como QA Lead na DTI Digital, alocado na ADI Global. Dedico-me ao desenvolvimento de soluções de qualidade em tecnologia, aplicando testes manuais e implementando automações de front-end mobile com foco em excelência e inovação.',
-    'about.text2': 'Na DTI Digital, lidero iniciativas de qualidade para a empresa norte-americana ADI Global, consolidando práticas de testes manuais, automações de front-end mobile, exploração, API e pipelines, garantindo a excelência e confiabilidade das soluções desenvolvidas.',
-    
+    'about.text1': 'Me chamo Marcos Paulo Laine e atualmente atuo como QA Lead na DTI Digital, alocado no projeto da ISN, onde lidero a iniciativa de IA do projeto piloto AI-first da DTI. Aplico conhecimentos em testes automatizados, criação de casos de teste, testes de performance, análise de cobertura e implementação de pipelines CI/CD para validações funcionais.',
+    'about.text2': 'Lidero a estruturação e orquestração de agentes de IA voltados para testes, automação e qualidade. Anteriormente, no projeto ADI Global, implementei práticas de shift-left que reduziram em 75% a taxa de bugs gerados por história nas fases iniciais do desenvolvimento e em 96% o número de bugs identificados pelo cliente.',
+    'about.experience': 'Experiência Profissional',
+    'exp.isn.role': 'QA Lead — Projeto ISN',
+    'exp.isn.period': '06/2026 – Atualmente',
+    'exp.isn.b1': 'Atualmente alocado pela DTI Digital no projeto da empresa ISN, liderando a iniciação e execução da iniciativa de IA do projeto piloto AI-first da DTI.',
+    'exp.isn.b2': 'Estruturação e orquestração de agentes de IA voltados para testes, automação e qualidade.',
+    'exp.adi.role': 'QA Lead — Projeto ADI Global',
+    'exp.adi.period': '09/2025 – 06/2026',
+    'exp.adi.b1': 'Liderança de Engenheiros de Qualidade em projetos internacionais.',
+    'exp.adi.b2': 'Criação de casos de teste; definição de OKRs; análise de métricas e estatísticas de progresso de QA.',
+    'exp.adi.b3': 'Implementação de automações; integração de fluxos automatizados com pipelines (CI/CD); contato direto com o cliente.',
+    'exp.adi.b4': 'Implementação do shift-left no processo de desenvolvimento, reduzindo em 75% a taxa de bugs gerados por história já nas fases iniciais do desenvolvimento e em 96% o número de bugs identificados pelo cliente.',
+    'exp.qae.role': 'QA Engineer',
+    'exp.qae.period': '07/2024 – 09/2025',
+    'exp.qae.b1': 'Escrita de casos de teste.',
+    'exp.qae.b2': 'Implementação de fluxos de automação.',
+    'exp.qae.b3': 'Testes de API — Swagger; Postman; ReadyAPI.',
+    'exp.qae.b4': 'Testes front-end mobile — Maestro; Appium.',
+    'exp.qae.b5': 'Testes front-end — Selenium; Cypress; Playwright.',
+    'exp.be.role': 'Software Engineer — Backend',
+    'exp.be.period': '05/2024 – 07/2024',
+    'exp.be.b1': 'Estruturação e implementação de APIs.',
+    'exp.be.b2': 'Conexão e otimização de APIs com banco de dados.',
+    'exp.be.b3': 'Otimização de APIs.',
+
     // Projects
     'projects.title': 'Projetos',
     'projects.lead': 'Alguns projetos acadêmicos e pessoais — aplicativos mobile, páginas web, sistemas e automações.',
@@ -71,7 +94,8 @@ const translations = {
     'knowledge.cyber': 'Cybersegurança',
     'knowledge.mobileTest': 'Teste Mobile',
     'knowledge.systems': 'Hacking Ético',
-    
+    'knowledge.ai': 'IA',
+
     // Contact
     'contact.title': 'Contato',
     'contact.lead': 'Vamos conversar? Me encontre nas redes ou envie um e-mail.',
@@ -91,7 +115,7 @@ const translations = {
     'hero.greeting': 'Hello, my name is',
     'hero.name': 'Marcos Laine',
     'hero.subtitle': 'Software Engineering Student • Quality Assurance (QA)',
-    'hero.description': 'Currently QA Lead at DTI Digital, assigned to ADI Global, applying manual testing implementing automation of front-end mobile.',
+    'hero.description': 'Currently QA Lead at DTI Digital, assigned to the ISN project, leading the AI initiative of DTI’s AI-first pilot, focused on automation, quality and AI agent orchestration.',
     'hero.viewProjects': 'View Projects',
     'hero.contact': 'Contact Me',
 
@@ -104,9 +128,32 @@ const translations = {
     
     // About
     'about.title': 'About Me',
-    'about.text1': 'My name is Marcos Paulo Laine and I currently work as QA Lead at DTI Digital, assigned to ADI Global. I dedicate myself to developing quality technology solutions, applying manual testing and implementing front-end mobile automation with focus on excellence and innovation.',
-    'about.text2': 'At DTI Digital, I lead quality initiatives for the North American company ADI Global, consolidating practices of manual testing, front-end mobile automation, exploration, API and pipelines, ensuring excellence and reliability of developed solutions.',
-    
+    'about.text1': 'My name is Marcos Paulo Laine and I currently work as QA Lead at DTI Digital, assigned to the ISN project, where I lead the AI initiative of DTI’s AI-first pilot. I apply expertise in automated testing, test case creation, performance testing, coverage analysis and the implementation of CI/CD pipelines for functional validations.',
+    'about.text2': 'I lead the structuring and orchestration of AI agents focused on testing, automation and quality. Previously, on the ADI Global project, I implemented shift-left practices that reduced the rate of bugs generated per story by 75% in the early stages of development and reduced bugs found by the client by 96%.',
+    'about.experience': 'Professional Experience',
+    'exp.isn.role': 'QA Lead — ISN Project',
+    'exp.isn.period': '06/2026 – Present',
+    'exp.isn.b1': 'Currently allocated by DTI Digital to the ISN project, leading the rollout and execution of DTI’s AI initiative for its AI-first pilot project.',
+    'exp.isn.b2': 'Structuring and orchestration of AI agents focused on testing, automation and quality.',
+    'exp.adi.role': 'QA Lead — ADI Global Project',
+    'exp.adi.period': '09/2025 – 06/2026',
+    'exp.adi.b1': 'Leadership of Quality Engineers on international projects.',
+    'exp.adi.b2': 'Test case creation; OKR definition; analysis of QA progress metrics and statistics.',
+    'exp.adi.b3': 'Implementation of automations; integration of automated flows with pipelines (CI/CD); direct client contact.',
+    'exp.adi.b4': 'Implementation of shift-left testing in the development process, reducing the rate of bugs generated per story by 75% from the early stages of development onward, and reducing the number of bugs found by the client by 96%.',
+    'exp.qae.role': 'QA Engineer',
+    'exp.qae.period': '07/2024 – 09/2025',
+    'exp.qae.b1': 'Test case writing.',
+    'exp.qae.b2': 'Implementation of automation flows.',
+    'exp.qae.b3': 'API testing — Swagger; Postman; ReadyAPI.',
+    'exp.qae.b4': 'Mobile front-end testing — Maestro; Appium.',
+    'exp.qae.b5': 'Front-end testing — Selenium; Cypress; Playwright.',
+    'exp.be.role': 'Software Engineer — Backend',
+    'exp.be.period': '05/2024 – 07/2024',
+    'exp.be.b1': 'API structuring and implementation.',
+    'exp.be.b2': 'Database connection and optimization of APIs.',
+    'exp.be.b3': 'API optimization.',
+
     // Projects
     'projects.title': 'Projects',
     'projects.lead': 'Some academic and personal projects — mobile apps, web pages, systems and automations.',
@@ -142,7 +189,8 @@ const translations = {
     'knowledge.cyber': 'Cybersecurity',
     'knowledge.mobileTest': 'Mobile Testing',
     'knowledge.systems': 'Ethical Hacking',
-    
+    'knowledge.ai': 'AI',
+
     // Contact
     'contact.title': 'Contact',
     'contact.lead': "Let's talk? Find me on social media or send an email.",

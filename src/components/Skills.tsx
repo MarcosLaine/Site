@@ -29,7 +29,10 @@ const Skills = () => {
     { name: 'Maestro', icon: '/img/skills/maestro.png' },
     { name: 'C++', icon: '/img/skills/CPP.png' },
     { name: 'C#', icon: '/img/skills/CSharp.png' },
-    { name: 'Dart', icon: '/img/skills/Dart.png' }
+    { name: 'Dart', icon: '/img/skills/Dart.png' },
+    { name: 'Playwright', icon: '/img/skills/Playwright.svg' },
+    { name: 'Selenium', icon: '/img/skills/Selenium.svg' },
+    { name: 'Appium', icon: '/img/skills/Appium.svg' }
   ]
 
   const knowledge = [
@@ -46,7 +49,8 @@ const Skills = () => {
     { name: t('knowledge.cyber'), icon: '/img/knowledge/CyberSecurity.png', label: 'cyber' },
     { name: 'Mobile', icon: '/img/knowledge/mobileDevelopment.png', label: 'mobile' },
     { name: t('knowledge.mobileTest'), icon: '/img/knowledge/mobileTest.png', label: 'mobileTest' },
-    { name: t('knowledge.systems'), icon: '/img/knowledge/Hacker.png', label: 'systems' }
+    { name: t('knowledge.systems'), icon: '/img/knowledge/Hacker.png', label: 'systems' },
+    { name: t('knowledge.ai'), icon: '/img/knowledge/AI.svg', label: 'ai' }
   ]
 
   return (

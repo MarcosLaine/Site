@@ -21,7 +21,7 @@ const Contact = () => {
     {
       name: 'Email',
       url: 'mailto:contato@marcoslaine.com',
-      icon: '/img/contact/Gmail.png',
+      icon: '/img/contact/Gmail.svg',
       handle: 'contato@marcoslaine.com',
     },
   ]
@@ -66,7 +66,7 @@ const Contact = () => {
                       src={social.icon}
                       alt={social.name}
                       wrapperClassName="relative z-10 w-full h-full flex items-center justify-center"
-                      className="max-w-full max-h-full w-auto h-auto object-contain"
+                      className={`max-w-full max-h-full w-auto h-auto object-contain ${social.name === 'Email' ? 'scale-125' : ''}`}
                     />
                   </div>
                 </motion.div>

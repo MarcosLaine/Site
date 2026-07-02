@@ -29,6 +29,33 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
+export interface Experience {
+  id: number;
+  role: string; // PT
+  role_en?: string;
+  period: string;
+  bullets: string | string[]; // JSON string ou array (PT)
+  bullets_en?: string | string[]; // JSON string ou array (EN)
+  index: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export const experiencesAPI = {
+  // GET all experiences
+  async getAll(): Promise<Experience[]> {
+    const response = await fetch(`${API_URL}/experiences`);
+
+    if (!response.ok) {
+      throw new Error('Erro ao carregar experiências');
+    }
+
+    const result: ApiResponse<Experience[]> = await response.json();
+    return result.data;
+  }
+};
+
 export const projectsAPI = {
   // GET all projects
   async getAll(category?: string): Promise<Project[]> {

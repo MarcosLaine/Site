@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
+import experiencesRoutes from './routes/experiences.js';
 import projectsRoutes from './routes/projects.js';
 
 dotenv.config();
@@ -60,6 +61,7 @@ app.get('/health', (req, res) => {
 
 // Routes
 app.use('/api/projects', projectsRoutes);
+app.use('/api/experiences', experiencesRoutes);
 
 // 404 handler
 app.use((req, res) => {

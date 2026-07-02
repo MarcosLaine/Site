@@ -25,6 +25,22 @@ CREATE TABLE IF NOT EXISTS projects (
 -- Note: O campo technologies pode ser NULL ou um JSON array como: '["React", "Node.js", "MySQL"]'
 -- Use description_key para usar o sistema de tradução ou description_en para tradução direta
 INSERT INTO projects (name, description, description_key, description_en, media_url, media_type, test_link, github_link, is_github_private, category, technologies, `index`) VALUES
-('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', 'projects.lembretes.description', 'Simple application for task organization and reminders.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', '["React", "TypeScript", "Tailwind CSS"]', 1)
+('Lembretes', 'Aplicativo simples para organização de tarefas e lembretes.', 'projects.lembretes.description', 'Simple application for task organization and reminders.', '/img/carousel1/Lembretes.png', 'image', NULL, 'https://github.com/marcoslaine/lembretes', false, 'frontend', '["React", "TypeScript", "Tailwind CSS"]', 1);
+
+-- Tabela de Experiência Profissional (ver também migration_add_experiences.sql)
+CREATE TABLE IF NOT EXISTS experiences (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  role VARCHAR(255) NOT NULL COMMENT 'Cargo/título em português',
+  role_en VARCHAR(255) COMMENT 'Cargo/título em inglês',
+  period VARCHAR(100) NOT NULL COMMENT 'Período (ex: 06/2026 – Atualmente)',
+  bullets TEXT NOT NULL COMMENT 'JSON array de bullets em português',
+  bullets_en TEXT COMMENT 'JSON array de bullets em inglês',
+  `index` INT NOT NULL DEFAULT 0 COMMENT 'Ordem de exibição (1 = primeiro)',
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_exp_active (is_active),
+  INDEX idx_exp_index (`index`)
+)
 
 

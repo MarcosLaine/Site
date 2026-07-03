@@ -37,9 +37,13 @@ const About = () => {
   useEffect(() => {
     const mapExperience = (exp: Experience): ExperienceItem => {
       const isEn = language === 'en'
+      const translatePeriod = (period: string) =>
+        isEn
+          ? period.replace(/Atualmente/gi, 'Present')
+          : period.replace(/Present/gi, 'Atualmente')
       return {
         role: (isEn && exp.role_en) ? exp.role_en : exp.role,
-        period: exp.period,
+        period: translatePeriod(exp.period),
         bullets: parseBullets((isEn && exp.bullets_en) ? exp.bullets_en : exp.bullets),
       }
     }

@@ -30,7 +30,8 @@ export function DottedSurface({
     const height = container.clientHeight || window.innerHeight
 
     const scene = new THREE.Scene()
-    scene.fog = new THREE.Fog(isDark ? 0x050505 : 0xfafaf9, 800, 14000)
+    // Névoa também perto da câmera: os pontos mais próximos (e maiores) somem atrás do texto
+    scene.fog = new THREE.Fog(isDark ? 0x050505 : 0xfafaf9, 1400, 9000)
 
     const camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000)
     camera.position.set(0, 355, 1220)
@@ -51,7 +52,8 @@ export function DottedSurface({
 
     const positions: number[] = []
     const colors: number[] = []
-    const dotColor = isDark ? [180, 160, 130] : [0, 0, 0]
+    // Cores de vértice vão de 0 a 1; tons quentes e discretos para não competir com o texto
+    const dotColor = isDark ? [180 / 255, 160 / 255, 130 / 255] : [150 / 255, 125 / 255, 90 / 255]
 
     for (let ix = 0; ix < AMOUNTX; ix++) {
       for (let iy = 0; iy < AMOUNTY; iy++) {
@@ -66,11 +68,26 @@ export function DottedSurface({
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3))
 
+    // Sprite redondo (o padrão do PointsMaterial é um quadrado)
+    const sprite = document.createElement('canvas')
+    sprite.width = sprite.height = 64
+    const ctx = sprite.getContext('2d')
+    if (ctx) {
+      ctx.beginPath()
+      ctx.arc(32, 32, 30, 0, Math.PI * 2)
+      ctx.fillStyle = '#fff'
+      ctx.fill()
+    }
+    const dotTexture = new THREE.CanvasTexture(sprite)
+
     const material = new THREE.PointsMaterial({
-      size: isDark ? 7 : 9,
+      size: isDark ? 7 : 6,
+      map: dotTexture,
+      alphaTest: 0.1,
       vertexColors: true,
       transparent: true,
-      opacity: isDark ? 0.65 : 0.9,
+      opacity: isDark ? 0.5 : 0.35,
+      depthWrite: false,
       sizeAttenuation: true,
     })
 
@@ -142,6 +159,7 @@ export function DottedSurface({
 
       geometry.dispose()
       material.dispose()
+      dotTexture.dispose()
       renderer.dispose()
 
       if (container.contains(canvas)) {

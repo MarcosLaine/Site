@@ -1,7 +1,7 @@
 // Executa um arquivo de migração SQL usando a mesma conexão do backend (backend/.env).
 // Uso (dentro de backend/): npm run migrate -- database/migration_update_po_2026_10.sql
+import 'dotenv/config';
 import { readFile } from 'node:fs/promises';
-import pool from '../config/database.js';
 
 const file = process.argv[2];
 
@@ -9,6 +9,15 @@ if (!file) {
   console.error('Uso: npm run migrate -- <arquivo.sql>');
   process.exit(1);
 }
+
+const missing = ['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'].filter((key) => !process.env[key]);
+if (missing.length > 0) {
+  console.error(`❌ Faltam variáveis no backend/.env: ${missing.join(', ')}`);
+  console.error('   Use os mesmos valores configurados no serviço do Render (inclua DB_PORT e DB_SSL=true para o Aiven).');
+  process.exit(1);
+}
+
+const { default: pool } = await import('../config/database.js');
 
 const sql = await readFile(file, 'utf8');
 

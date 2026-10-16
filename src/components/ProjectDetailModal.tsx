@@ -174,7 +174,7 @@ const ProjectDetailModal = ({ project, onClose }: ProjectDetailModalProps) => {
               {project.technologies.length > 0 && (
                 <div className="mt-4">
                   <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400 font-medium mb-2">
-                    Tech
+                    {t('projects.tech')}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {project.technologies.map((tech) => (

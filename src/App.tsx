@@ -5,9 +5,11 @@ import PageSkeleton from './components/skeletons/PageSkeleton'
 import { usePageReady } from './hooks/usePageReady'
 import { DottedSurface } from '@/components/ui/dotted-surface'
 import Contact from './components/Contact'
+import Experience from './components/Experience'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
 import HeroScroll from './components/HeroScroll'
+import Highlights from './components/Highlights'
 import Navbar from './components/Navbar'
 import Skills from './components/Skills'
 import { LanguageProvider } from './context/LanguageContext'
@@ -56,8 +58,10 @@ function App() {
               transition={{ duration: 0.4 }}
             >
               <Hero />
-              <HeroScroll />
               <About />
+              <Experience />
+              <HeroScroll />
+              <Highlights />
               <Skills />
               <Contact />
             </motion.main>

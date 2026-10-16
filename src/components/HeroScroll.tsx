@@ -98,7 +98,7 @@ const HeroScroll = () => {
       mobile: 'Mobile / Apps',
       backend: 'Backend / APIs',
       fullstack: 'Full Stack',
-      geral: 'Outros Projetos',
+      geral: t('projects.other'),
     }),
     [t]
   )
@@ -116,11 +116,11 @@ const HeroScroll = () => {
   const projectsCount = loading ? skeletonCount : showcaseProjects.length
 
   return (
-    <section id="projects" className="relative z-10 -mt-8 md:-mt-16">
+    <section id="projects" className="relative z-10 scroll-mt-16">
       <ContainerScroll
         projectsCount={projectsCount}
         titleComponent={
-          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-neutral-50">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-neutral-50">
             <span className="text-gradient">{t('projects.title')}</span>
           </h2>
         }
@@ -167,14 +167,45 @@ const HeroScroll = () => {
                       className="w-full h-full object-contain p-1.5 sm:p-2 transition-transform duration-300 group-hover:scale-[1.04]"
                     />
                   </div>
+                  {project.testLink && (
+                    <span className="absolute top-2 left-2 z-10 inline-flex items-center gap-1 rounded-full bg-white/90 dark:bg-black/70 px-2 py-0.5 text-[10px] sm:text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 shadow-sm backdrop-blur">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      {t('projects.live')}
+                    </span>
+                  )}
                   <div className="shrink-0 px-3 py-2 sm:py-2.5 bg-white dark:bg-neutral-950 border-t border-slate-200 dark:border-white/10">
-                    <h3 className="text-xs sm:text-sm md:text-base font-bold text-slate-900 dark:text-neutral-50 line-clamp-1">
-                      {project.name}
-                    </h3>
-                    {project.description && (
-                      <p className="text-[11px] sm:text-xs md:text-sm text-slate-600 dark:text-slate-300 line-clamp-2 mt-1 leading-snug">
-                        {project.description}
-                      </p>
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h3 className="text-xs sm:text-sm md:text-base font-bold text-slate-900 dark:text-neutral-50 line-clamp-1">
+                        {project.name}
+                      </h3>
+                      {project.category && (
+                        <span className="hidden sm:inline shrink-0 text-[10px] md:text-[11px] uppercase tracking-wide text-amber-700 dark:text-amber-200/70">
+                          {project.category}
+                        </span>
+                      )}
+                    </div>
+                    {project.technologies.length > 0 ? (
+                      <div className="mt-1.5 flex gap-1 overflow-hidden">
+                        {project.technologies.slice(0, 3).map((tech) => (
+                          <span
+                            key={tech}
+                            className="shrink-0 px-1.5 py-0.5 rounded-md text-[10px] sm:text-[11px] bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-neutral-300"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.technologies.length > 3 && (
+                          <span className="shrink-0 px-1 py-0.5 text-[10px] sm:text-[11px] text-slate-500 dark:text-neutral-500">
+                            +{project.technologies.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      project.description && (
+                        <p className="text-[11px] sm:text-xs md:text-sm text-slate-600 dark:text-slate-300 line-clamp-1 mt-1 leading-snug">
+                          {project.description}
+                        </p>
+                      )
                     )}
                   </div>
                   </motion.button>

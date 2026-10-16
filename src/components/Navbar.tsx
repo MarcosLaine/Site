@@ -39,8 +39,8 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
           </motion.a>
 
           <div className="flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-1.5">
-              {['about', 'projects', 'skills', 'contact'].map((item) => (
+            <div className="hidden lg:flex items-center gap-1">
+              {['about', 'experience', 'projects', 'highlights', 'contact'].map((item) => (
                 <HoverButton key={item} href={`#${item}`} variant="nav">
                   {t(`nav.${item}`)}
                 </HoverButton>
@@ -65,7 +65,7 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
             />
 
             <HoverButton
-              href={`/docs/Marcos_Laine_QA_${language.toUpperCase()}.pdf`}
+              href={`/docs/Marcos_Laine_PO_${language.toUpperCase()}.pdf`}
               download
               variant="navbar"
               className="hidden xs:inline-flex"

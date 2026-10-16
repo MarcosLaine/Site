@@ -3,20 +3,35 @@ import { HoverButton } from '@/components/ui/hover-button'
 import { TextScramble } from '@/components/ui/text-scramble'
 import { ImageWithSkeleton } from './ui/ImageWithSkeleton'
 import { useLanguage } from '../context/LanguageContext'
+import { heroStats } from '../data/profile'
 
 const Hero = () => {
   const { t, language } = useLanguage()
+  const stats = heroStats[language]
 
   return (
-    <section id="top" className="min-h-screen flex items-center justify-center pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="top" className="min-h-screen flex flex-col justify-center pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative z-10">
       <div className="container mx-auto max-w-7xl">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid md:grid-cols-[1.15fr_0.85fr] gap-8 md:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="space-y-4 sm:space-y-6 order-2 md:order-1"
           >
+            <motion.span
+              className="inline-flex items-center gap-2 rounded-full border border-amber-700/20 dark:border-amber-200/15 bg-amber-50/70 dark:bg-amber-200/[0.06] px-3 py-1 text-xs sm:text-sm font-medium text-amber-900 dark:text-amber-100/90"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              {t('hero.badge')}
+            </motion.span>
+
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
               <TextScramble
                 key={language}
@@ -45,7 +60,7 @@ const Hero = () => {
             </h1>
 
             <motion.p
-              className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-neutral-400"
+              className="text-base sm:text-lg md:text-xl font-medium text-slate-700 dark:text-neutral-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -54,7 +69,7 @@ const Hero = () => {
             </motion.p>
 
             <motion.p
-              className="text-sm sm:text-base text-slate-700 dark:text-neutral-400 max-w-xl"
+              className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-700 dark:text-neutral-400 max-w-xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -63,7 +78,7 @@ const Hero = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-col xs:flex-row gap-3 sm:gap-4 pt-2"
+              className="flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4 pt-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -74,6 +89,14 @@ const Hero = () => {
 
               <HoverButton href="mailto:contato@marcoslaine.com" variant="outline">
                 {t('hero.contact')}
+              </HoverButton>
+
+              <HoverButton
+                href={`/docs/Marcos_Laine_PO_${language.toUpperCase()}.pdf`}
+                download
+                variant="outline"
+              >
+                {t('hero.downloadCV')}
               </HoverButton>
             </motion.div>
           </motion.div>
@@ -87,7 +110,7 @@ const Hero = () => {
             <motion.div
               className="relative w-56 h-56 xs:w-64 xs:h-64 sm:w-80 sm:h-80 md:w-72 md:h-72 lg:w-96 lg:h-96"
               animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500 rounded-3xl blur-2xl opacity-50" />
               <ImageWithSkeleton
@@ -100,10 +123,26 @@ const Hero = () => {
             </motion.div>
           </motion.div>
         </div>
+
+        <motion.dl
+          className="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
+        >
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="glass-light dark:glass rounded-2xl px-4 py-4 sm:px-5 sm:py-5 flex flex-col gap-1"
+            >
+              <dt className="text-xs sm:text-sm leading-snug text-slate-600 dark:text-neutral-400">{stat.label}</dt>
+              <dd className="order-first text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">{stat.value}</dd>
+            </div>
+          ))}
+        </motion.dl>
       </div>
     </section>
   )
 }
 
 export default Hero
-

@@ -1,130 +1,87 @@
 import { motion } from 'framer-motion'
 import { ImageWithSkeleton } from './ui/ImageWithSkeleton'
+import { SectionHeading } from './ui/section-heading'
 import { useLanguage } from '../context/LanguageContext'
-
-interface Skill {
-  name: string
-  icon: string
-}
+import { skillGroups, tools } from '../data/profile'
 
 const Skills = () => {
-  const { t } = useLanguage()
-
-  const skills: Skill[] = [
-    { name: 'Java', icon: '/img/skills/Java.png' },
-    { name: 'JavaScript', icon: '/img/skills/JavaScript.png' },
-    { name: 'Python', icon: '/img/skills/Python.png' },
-    { name: 'React', icon: '/img/skills/React.png' },
-    { name: 'Flutter', icon: '/img/skills/Flutter.png' },
-    { name: '.NET', icon: '/img/skills/Dotnet.png' },
-    { name: 'Firebase', icon: '/img/skills/Firebase.png' },
-    { name: 'SQL', icon: '/img/skills/SQL.png' },
-    { name: 'Linux', icon: '/img/skills/Linux.png' },
-    { name: 'Git', icon: '/img/skills/Git.png' },
-    { name: 'GitHub', icon: '/img/skills/GitHub.png' },
-    { name: 'Postman', icon: '/img/skills/Postman.png' },
-    { name: 'Jira', icon: '/img/skills/Jira.png' },
-    { name: 'Azure DevOps', icon: '/img/skills/Azure-Devops.png' },
-    { name: 'ReadyAPI', icon: '/img/skills/readyapi.png' },
-    { name: 'Maestro', icon: '/img/skills/maestro.png' },
-    { name: 'C++', icon: '/img/skills/CPP.png' },
-    { name: 'C#', icon: '/img/skills/CSharp.png' },
-    { name: 'Dart', icon: '/img/skills/Dart.png' },
-    { name: 'Playwright', icon: '/img/skills/Playwright.svg' },
-    { name: 'Selenium', icon: '/img/skills/Selenium.svg' },
-    { name: 'Appium', icon: '/img/skills/Appium.svg' }
-  ]
-
-  const knowledge = [
-    { name: 'QA', icon: '/img/knowledge/QA.png', label: 'QA' },
-    { name: t('knowledge.api'), icon: '/img/knowledge/Api.png', label: 'api' },
-    { name: t('knowledge.manual'), icon: '/img/knowledge/ManualTesting.png', label: 'manual' },
-    { name: t('knowledge.automation'), icon: '/img/knowledge/Automation.png', label: 'automation' },
-    { name: 'Pipelines', icon: '/img/knowledge/Azure-Pipelines.png', label: 'pipelines' },
-    { name: 'Front/Back', icon: '/img/knowledge/Coding.png', label: 'coding' },
-    { name: t('knowledge.database'), icon: '/img/knowledge/DataBase.png', label: 'database' },
-    { name: t('knowledge.frontend'), icon: '/img/knowledge/Internet.png', label: 'frontend' },
-    { name: t('knowledge.agile'), icon: '/img/knowledge/Scrum.png', label: 'agile' },
-    { name: t('knowledge.engineering'), icon: '/img/knowledge/SoftwareEngineer.png', label: 'engineering' },
-    { name: t('knowledge.cyber'), icon: '/img/knowledge/CyberSecurity.png', label: 'cyber' },
-    { name: 'Mobile', icon: '/img/knowledge/mobileDevelopment.png', label: 'mobile' },
-    { name: t('knowledge.mobileTest'), icon: '/img/knowledge/mobileTest.png', label: 'mobileTest' },
-    { name: t('knowledge.systems'), icon: '/img/knowledge/Hacker.png', label: 'systems' },
-    { name: t('knowledge.ai'), icon: '/img/knowledge/AI.svg', label: 'ai' }
-  ]
+  const { t, language } = useLanguage()
+  const groups = skillGroups[language]
 
   return (
-    <section id="skills" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="container mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section id="skills" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 relative z-10 scroll-mt-16">
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading eyebrow={t('skills.eyebrow')} title={t('skills.title')} />
+
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
+          {groups.map((group, groupIndex) => (
+            <motion.div
+              key={group.title}
+              className="glass-light dark:glass p-5 sm:p-6 rounded-2xl shadow-xl"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: groupIndex * 0.1 }}
+            >
+              <h3 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-neutral-100 mb-4">
+                {group.title}
+              </h3>
+              <ul className="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <li
+                    key={item}
+                    className="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-amber-100/70 text-amber-950 border border-amber-800/10 dark:bg-amber-200/[0.07] dark:text-amber-50/90 dark:border-amber-200/10"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.h3
+          className="text-lg sm:text-xl font-semibold mb-5 sm:mb-6 text-center text-slate-800 dark:text-neutral-200"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center">
-            <span className="text-gradient">{t('skills.title')}</span>
-          </h2>
+          {t('skills.tools')}
+        </motion.h3>
 
-          {/* Skills */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-16">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full bg-white dark:bg-white shadow-lg hover:shadow-xl transition-shadow"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.03 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-              >
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+          {tools.map((tool, index) => (
+            <motion.div
+              key={tool.name}
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.03 }}
+              whileHover={{ scale: 1.1, y: -5 }}
+            >
+              {tool.icon ? (
                 <ImageWithSkeleton
-                  src={skill.icon}
-                  alt={skill.name}
+                  src={tool.icon}
+                  alt=""
                   wrapperClassName="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
                   className="w-4 h-4 sm:w-5 sm:h-5 object-contain"
                 />
-                <span className="text-xs sm:text-sm font-medium text-slate-900">{skill.name}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Knowledge */}
-          <motion.h3
-            className="text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8 text-center text-slate-800 dark:text-neutral-200"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            {t('skills.knowledge')}
-          </motion.h3>
-
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {knowledge.map((item, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full bg-white dark:bg-white shadow-lg hover:shadow-xl transition-shadow"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.03 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-              >
-                <ImageWithSkeleton
-                  src={item.icon}
-                  alt={item.name}
-                  wrapperClassName="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
-                  className="w-4 h-4 sm:w-5 sm:h-5 object-contain"
-                />
-                <span className="text-xs sm:text-sm font-medium text-slate-900">{item.name}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+              ) : (
+                <span
+                  className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 rounded-full bg-slate-900 text-white text-[9px] sm:text-[10px] font-bold flex items-center justify-center"
+                  aria-hidden
+                >
+                  {tool.name[0]}
+                </span>
+              )}
+              <span className="text-xs sm:text-sm font-medium text-slate-900">{tool.name}</span>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
 }
 
 export default Skills
-

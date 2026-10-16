@@ -14,7 +14,7 @@ const Footer = () => {
           className="text-center"
         >
           <p className="text-xs sm:text-sm text-slate-600 dark:text-neutral-500 px-4">
-            {t('footer.copyright')}
+            © {new Date().getFullYear()} Marcos Laine. {t('footer.rights')}
           </p>
           <motion.div
             className="mt-3 sm:mt-4 flex justify-center items-center gap-2 flex-wrap"

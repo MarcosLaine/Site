@@ -1,0 +1,231 @@
+[
+  {
+    "id": 13,
+    "index": 1,
+    "is_active": true,
+    "name": "Jumie",
+    "category": "Mobile",
+    "description": "Assistente pessoal com IA para iOS e Android: agenda de várias contas Google, controle de gastos e orçamentos, e-mails importantes, lembretes, listas e memória, tudo numa conversa por voz ou texto. Projeto próprio, do conceito ao produto: app em Flutter, backend em Cloud Functions (TypeScript) e conversa por voz em tempo real com a API Live do Gemini, com o servidor como dono do prompt e das ferramentas. Tem assinatura freemium (Jumie Pro via RevenueCat), resumos da manhã e da semana por notificação, widget na tela inicial e privacidade em primeiro lugar: áudios e fotos são apagados logo após o processamento. Disponível em português, inglês e espanhol.",
+    "description_en": "AI personal assistant for iOS and Android: calendars from multiple Google accounts, expense and budget tracking, important emails, reminders, lists and memory, all in one voice or text conversation. A personal project from concept to product: Flutter app, Cloud Functions (TypeScript) backend and real-time voice conversation with the Gemini Live API, with the server owning the prompt and the tools. It has a freemium subscription (Jumie Pro via RevenueCat), morning and weekly summaries via notifications, a home-screen widget and a privacy-first design: audio and photos are deleted right after processing. Available in Portuguese, English and Spanish.",
+    "media_type": "image",
+    "media_url": [
+      "/img/carousel1/Jumie1.jpeg",
+      "/img/carousel1/Jumie2.jpeg",
+      "/img/carousel1/Jumie3.jpeg",
+      "/img/carousel1/Jumie4.jpeg",
+      "/img/carousel1/Jumie5.jpeg",
+      "/img/carousel1/Jumie6.jpeg"
+    ],
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "Cloud Functions",
+      "TypeScript",
+      "Node.js",
+      "Gemini Live API",
+      "Vertex AI",
+      "Cloud Firestore",
+      "Firebase Auth",
+      "Google Calendar API",
+      "Gmail API",
+      "RevenueCat",
+      "Firebase Cloud Messaging",
+      "App Check",
+      "Google Analytics"
+    ],
+    "test_link": "https://assessor-3f985.web.app",
+    "is_github_private": true
+  },
+  {
+    "id": 9,
+    "index": 2,
+    "is_active": true,
+    "name": "AdvoFind",
+    "category": "Mobile & Web",
+    "description": "App de serviços jurídicos (Web, Android e iOS) que conecta quem precisa de orientação a advogados e escritórios qualificados. Projeto próprio, do conceito ao lançamento: começou com discovery — entrevistas com advogados e clientes sobre as barreiras de acesso à justiça — e virou um produto com busca por especialidade e localização, perfis, avaliações, área administrativa e notificações.",
+    "description_en": "Legal-services app (Web, Android and iOS) connecting people who need legal guidance with qualified lawyers and law firms. A personal project from concept to launch: it started with discovery — interviews with lawyers and clients about the barriers to accessing legal services — and became a product with search by specialty and location, profiles, reviews, an admin area and notifications.",
+    "media_type": "image",
+    "media_url": [
+      "/img/carousel1/Advofind1.jpeg",
+      "/img/carousel1/Advofind2.jpeg",
+      "/img/carousel1/Advofind3.jpeg"
+    ],
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "General Firebase",
+      "Analytics",
+      "Provider",
+      "Go Router",
+      "Node.js",
+      "Google APIs",
+      "Geolocator",
+      "Geocoding",
+      "Image Picker",
+      "In-App Purchase",
+      "App Links",
+      "Share Plus"
+    ],
+    "test_link": "https://advofind.com.br",
+    "is_github_private": true
+  },
+  {
+    "id": 2,
+    "index": 3,
+    "is_active": true,
+    "name": "Controle-se.com",
+    "category": "Web",
+    "description": "Sistema web completo de gestão financeira desenvolvido em Java puro com estruturas de dados implementadas do zero (Árvore B+ e Hash Extensível). Inclui API REST, frontend moderno, dashboards interativos, relatórios avançados com exportação em múltiplos formatos (CSV, XLSX, PDF) e operações otimizadas para alta performance.",
+    "description_en": "Complete web-based financial management system developed in pure Java with data structures implemented from scratch (B+ Tree and Extendible Hash). Features REST API, modern frontend, interactive dashboards, advanced reporting with multi-format export (CSV, XLSX, PDF), and optimized operations for high performance.",
+    "media_type": "image",
+    "media_url": [
+      "/img/carousel1/controle-se1.png",
+      "/img/carousel1/controle-se2.png",
+      "/img/carousel1/controle-se3.png"
+    ],
+    "technologies": [
+      "Java",
+      "HTML5",
+      "CSS3",
+      "JavaScript ES6+",
+      "Chart.js",
+      "jsPDF",
+      "JSON",
+      "REST API",
+      "HTTP",
+      "Estruturas de Dados Avançadas",
+      "Docker",
+      "Render"
+    ],
+    "test_link": "https://controle-se.com",
+    "github_link": "https://github.com/marcoslaine/controle-se",
+    "is_github_private": false
+  },
+  {
+    "id": 10,
+    "index": 4,
+    "is_active": true,
+    "name": "Habitüs",
+    "category": "Mobile & Web",
+    "description": "Aplicativo mobile em Flutter para acompanhamento de hábitos e metas. Permite criar e gerenciar hábitos personalizados, registrar progresso diário com fotos, definir metas com prazos, organizar tarefas por prioridade e categoria, e acompanhar evolução através de um sistema gamificado com pontos e níveis. Desenvolvido com Material Design 3, autenticação Firebase e arquitetura limpa.",
+    "description_en": "Flutter mobile app for habit and goal tracking. Create and manage personalized habits, record daily progress with photos, set time-bound goals, organize tasks by priority and category, and track evolution through a gamified system with points and levels. Built with Material Design 3, Firebase authentication, and clean architecture.",
+    "media_type": "image",
+    "media_url": [
+      "/img/carousel1/Habitus1.jpeg",
+      "/img/carousel1/Habitus2.jpeg",
+      "/img/carousel1/Habitus3.jpeg",
+      "/img/carousel1/Habitus4.jpeg",
+      "/img/carousel1/Habitus5.jpeg",
+      "/img/carousel1/Habitus6.jpeg"
+    ],
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "General Firebase Features",
+      "Provider",
+      "Material Design",
+      "Image Picker",
+      "UUID"
+    ],
+    "test_link": "https://habitus-80859.web.app",
+    "is_github_private": true
+  },
+  {
+    "id": 1,
+    "index": 5,
+    "is_active": true,
+    "name": "Lembretes.net",
+    "category": "Web",
+    "description": "Aplicação web para gerenciamento de tarefas com autenticação JWT, dashboard interativo e interface com glassmorphism. Stack: React 18 + Vite (frontend) e ASP.NET Core 8 + PostgreSQL (backend). Funcionalidades: busca, filtros, categorias, lembretes recorrentes e exportação de dados. Design responsivo com dark mode.",
+    "description_en": "Web application for task management with JWT authentication, interactive dashboard, and glassmorphism interface. Stack: React 18 + Vite (frontend) and ASP.NET Core 8 + PostgreSQL (backend). Features: search, filters, categories, recurring reminders, and data export. Responsive design with dark mode.",
+    "media_type": "image",
+    "media_url": [
+      "/img/carousel1/Lembretes1.png",
+      "/img/carousel1/Lembretes2.png"
+    ],
+    "technologies": [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "PostCSS",
+      ".NET 8.0",
+      "C#",
+      "PostgreSQL",
+      "Npgsql",
+      "JWT",
+      "ASP.NET Core",
+      "OpenAPI"
+    ],
+    "test_link": "https://lembretes.net",
+    "github_link": "https://github.com/marcoslaine/gerenciador-de-tarefas",
+    "is_github_private": false
+  },
+  {
+    "id": 11,
+    "index": 6,
+    "is_active": true,
+    "name": "Quanto Deu A Conta?",
+    "category": "Mobile",
+    "description": "Aplicativo mobile Flutter para dividir contas e despesas entre amigos. Inclui autenticação de usuários, criação de contas passo a passo com taxas de serviço, gerenciamento de itens, histórico de contas e descoberta de bares/restaurantes próximos com integração do Google Maps.",
+    "description_en": "A Flutter mobile app for splitting bills and expenses among friends. Features include user authentication, step-by-step bill creation with service fees, item management, bill history tracking, and nearby restaurants/bars discovery using Google Maps integration.",
+    "media_type": "image",
+    "media_url": [
+      "/img/carousel1/Quanto-deu-a-conta1.jpeg",
+      "/img/carousel1/Quanto-deu-a-conta2.jpeg",
+      "/img/carousel1/Quanto-deu-a-conta3.jpeg",
+      "/img/carousel1/Quanto-deu-a-conta4.jpeg",
+      "/img/carousel1/Quanto-deu-a-conta5.jpeg",
+      "/img/carousel1/Quanto-deu-a-conta6.jpeg"
+    ],
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "Firebase Auth",
+      "Cloud Firestore",
+      "Google Maps",
+      "Geolocator",
+      "HTTP",
+      "Material Design"
+    ],
+    "is_github_private": true
+  },
+  {
+    "id": 12,
+    "index": 7,
+    "is_active": true,
+    "name": "Crypto Bot",
+    "category": "Mobile & Web",
+    "description": "Bot de trading automatizado de criptomoedas com interface web. O CryptoBot oferece uma solução para gerenciamento de investimentos em criptomoedas, integrando-se diretamente com a API da Binance. O sistema utiliza estratégias baseadas em indicadores técnicos (médias móveis e RSI) para executar operações de compra e venda automaticamente. A aplicação conta com autenticação segura, dashboard interativo, sincronização de transações históricas e suporte PWA para uso mobile. As chaves de API são armazenadas de forma criptografada, garantindo segurança dos dados do usuário.",
+    "description_en": "Automated cryptocurrency trading bot with a complete web interface. CryptoBot provides a comprehensive solution for cryptocurrency investment management, directly integrating with the Binance API. The system uses trading strategies based on technical indicators (moving averages and RSI) to automatically execute buy and sell operations. The application features secure authentication, an interactive dashboard, historical transaction synchronization, and PWA support for mobile use. API keys are stored in encrypted form, ensuring user data security.",
+    "media_type": "image",
+    "media_url": [
+      "img/carousel1/cryptobot.png"
+    ],
+    "technologies": [
+      "Python",
+      "Flask",
+      "React",
+      "JavaScript",
+      "SQLite",
+      "Tailwind CSS",
+      "JWT",
+      "Binance API",
+      "PWA",
+      "Gunicorn",
+      "Pandas",
+      "Cryptography",
+      "Flask-CORS",
+      "Flask-JWT-Extended",
+      "python-binance",
+      "React Router",
+      "Axios",
+      "Heroicons",
+      "Werkzeug"
+    ],
+    "test_link": "https://cryptobot-app.onrender.com",
+    "github_link": "https://github.com/marcoslaine/cryptobot",
+    "is_github_private": false
+  }
+]

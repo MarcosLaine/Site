@@ -1,150 +1,50 @@
 # Portfólio - Marcos Laine
 
-Projeto de portfólio desenvolvido com React, TypeScript, Vite e backend Node.js/Express.
-
-## 📋 Pré-requisitos
-
-- Node.js (versão 18 ou superior)
-- npm ou yarn
-- MySQL ou banco de dados compatível (ex: Aiven)
+Site estático em React, TypeScript e Vite, publicado no GitHub Pages (marcoslaine.com). Não tem backend nem banco:
+os projetos e as experiências ficam em arquivos JSON dentro do repositório.
 
 ## 🚀 Como rodar localmente
 
-### 1. Instalar dependências do frontend
+Requer Node.js 18 ou superior.
 
 ```bash
 npm install
-```
-
-### 2. Instalar dependências do backend
-
-```bash
-cd backend
-npm install
-cd ..
-```
-
-### 3. Configurar variáveis de ambiente
-
-Crie um arquivo `.env` na pasta `backend/` com as seguintes variáveis:
-
-```env
-# Porta do servidor
-PORT=3001
-
-# Configurações do banco de dados
-DB_HOST=seu-host-mysql
-DB_PORT=3306
-DB_USER=seu-usuario
-DB_PASSWORD=sua-senha
-DB_NAME=nome-do-banco
-DB_SSL=false
-
-# API Key (para operações de escrita)
-API_KEY=sua-chave-api-secreta
-
-# URLs
-FRONTEND_URL=http://localhost:5173
-NODE_ENV=development
-```
-
-**Nota:** Se estiver usando Aiven, configure `DB_SSL=true`.
-
-### 4. Criar o banco de dados
-
-Execute o script SQL para criar as tabelas:
-
-```bash
-# Se tiver MySQL instalado localmente
-mysql -u seu-usuario -p nome-do-banco < backend/database/schema.sql
-
-# Ou execute manualmente no seu cliente MySQL (ex: MySQL Workbench, phpMyAdmin)
-```
-
-O arquivo `backend/database/schema.sql` contém a estrutura das tabelas e alguns dados de exemplo.
-
-### 5. Iniciar o backend
-
-```bash
-cd backend
-npm run dev
-# ou para produção
-npm start
-```
-
-O backend estará rodando em `http://localhost:3001`
-
-### 6. Configurar variáveis de ambiente do frontend (opcional)
-
-Crie um arquivo `.env` na raiz do projeto (se necessário):
-
-```env
-VITE_API_URL=http://localhost:3001/api
-```
-
-Por padrão, o frontend usa `http://localhost:3001/api` se a variável não estiver definida.
-
-### 7. Iniciar o frontend
-
-Em um novo terminal, na raiz do projeto:
-
-```bash
 npm run dev
 ```
 
-O frontend estará rodando em `http://localhost:5173`
+O site abre em `http://localhost:5173`.
 
-## 📝 Scripts Disponíveis
+## ✏️ Como editar o conteúdo
 
-### Frontend
-- `npm run dev` - Inicia o servidor de desenvolvimento
-- `npm run build` - Cria build de produção
-- `npm run preview` - Preview do build de produção
+| Arquivo | O que tem |
+|---|---|
+| `src/data/projects.json` | Projetos (grid e modal de detalhes) |
+| `src/data/experiences.json` | Experiência profissional (seção "Sobre Mim") |
+| `src/data/profile.ts` | Textos fixos do perfil |
 
-### Backend
-- `npm start` - Inicia o servidor em modo produção
-- `npm run dev` - Inicia o servidor com nodemon (auto-reload)
+Edite o arquivo (no editor ou direto no github.com) e faça commit na `main`. O workflow
+`.github/workflows/deploy.yml` gera o build e publica no GitHub Pages em 1 a 2 minutos.
 
-## 🗄️ Estrutura do Banco de Dados
+### Campos de um projeto
 
-A tabela `projects` contém os seguintes campos:
-- `id` - ID único
-- `name` - Nome do projeto
-- `description` - Descrição do projeto
-- `media_url` - URL(s) da mídia (pode ser string única ou JSON array)
-- `media_type` - Tipo de mídia ('image' ou 'video')
-- `test_link` - Link para testar o projeto
-- `github_link` - Link do repositório GitHub
-- `is_github_private` - Se o repositório é privado
-- `category` - Categoria do projeto
-- `technologies` - JSON array de tecnologias usadas
-- `order_index` - Ordem de exibição
-- `is_active` - Se o projeto está ativo
-- `created_at` - Data de criação
-- `updated_at` - Data de atualização
+- `id` — número único (não reutilize)
+- `index` — posição no grid (1 = primeiro)
+- `is_active` — `false` esconde o projeto sem apagar
+- `name`, `category`
+- `description` (PT) e `description_en` (EN); `description_key` (opcional) usa uma chave de tradução do `LanguageContext`
+- `media_type` — `"image"` ou `"video"`
+- `media_url` — lista de imagens, ex.: `["/img/carousel1/App1.png"]` (arquivos em `public/img/`)
+- `technologies` — lista, ex.: `["React", "TypeScript"]`
+- `test_link`, `github_link` (opcionais); `is_github_private` — `true` mostra o GitHub como privado
 
-## 🔧 Migrações
+### Campos de uma experiência
 
-Se a tabela já existe e você precisa adicionar o campo `technologies`, execute:
+- `id`, `index` (1 = mais recente), `is_active`
+- `role` (PT) e `role_en` (EN), `period` (ex.: `"10/2026 – Atualmente"`)
+- `bullets` (PT) e `bullets_en` (EN) — listas de frases
 
-```sql
-ALTER TABLE projects 
-ADD COLUMN technologies TEXT COMMENT 'JSON array de tecnologias ["React", "Node.js", "MySQL"]' 
-AFTER category;
-```
+## 📝 Scripts
 
-## 🐛 Troubleshooting
-
-### Erro de conexão com o banco
-- Verifique se as credenciais no `.env` estão corretas
-- Confirme que o banco de dados está rodando
-- Se usar Aiven, verifique se `DB_SSL=true`
-
-### CORS errors
-- Certifique-se de que `FRONTEND_URL` no backend aponta para `http://localhost:5173`
-- Verifique se o backend está rodando na porta 3001
-
-### Porta já em uso
-- Altere a porta no `.env` do backend (ex: `PORT=3002`)
-- Ajuste `VITE_API_URL` no frontend se necessário
-
+- `npm run dev` — servidor de desenvolvimento
+- `npm run build` — build de produção
+- `npm run preview` — preview do build

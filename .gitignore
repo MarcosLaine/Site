@@ -28,7 +28,6 @@ dist-ssr
 .env
 .env.local
 .env.production
-backend/.env
 
 # Build output
 build

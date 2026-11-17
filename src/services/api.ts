@@ -1,4 +1,7 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+// Os dados do site ficam em src/data/*.json (sem backend nem banco).
+// Para editar: altere o JSON e faça commit — o deploy do GitHub Pages publica sozinho.
+import experiencesData from '../data/experiences.json'
+import projectsData from '../data/projects.json'
 
 export interface Project {
   id: number;
@@ -6,27 +9,16 @@ export interface Project {
   description: string;
   description_key?: string; // Chave para tradução
   description_en?: string; // Descrição em inglês (alternativa)
-  media_url: string;
+  media_url: string | string[];
   media_type: 'image' | 'video';
   test_link?: string;
   github_link?: string;
   is_github_private: boolean;
   category: string;
-  technologies?: string | string[]; // JSON string ou array de tecnologias
-  /** Posição no grid (1 = primeiro). Antigo: order_index */
+  technologies?: string | string[];
+  /** Posição no grid (1 = primeiro) */
   index: number;
-  order_index?: number;
   is_active: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface ApiResponse<T> {
-  success: boolean;
-  data: T;
-  count?: number;
-  message?: string;
-  error?: string;
 }
 
 export interface Experience {
@@ -34,66 +26,31 @@ export interface Experience {
   role: string; // PT
   role_en?: string;
   period: string;
-  bullets: string | string[]; // JSON string ou array (PT)
-  bullets_en?: string | string[]; // JSON string ou array (EN)
+  bullets: string | string[]; // PT
+  bullets_en?: string | string[]; // EN
   index: number;
   is_active: boolean;
-  created_at: string;
-  updated_at: string;
 }
 
+const byIndex = <T extends { index: number }>(a: T, b: T) => a.index - b.index
+
+const projects = (projectsData as Project[]).filter(p => p.is_active).sort(byIndex)
+const experiences = (experiencesData as Experience[]).filter(e => e.is_active).sort(byIndex)
+
 export const experiencesAPI = {
-  // GET all experiences
   async getAll(): Promise<Experience[]> {
-    const response = await fetch(`${API_URL}/experiences`);
-
-    if (!response.ok) {
-      throw new Error('Erro ao carregar experiências');
-    }
-
-    const result: ApiResponse<Experience[]> = await response.json();
-    return result.data;
+    return experiences
   }
 };
 
 export const projectsAPI = {
-  // GET all projects
   async getAll(category?: string): Promise<Project[]> {
-    try {
-      const url = category 
-        ? `${API_URL}/projects?category=${category}`
-        : `${API_URL}/projects`;
-      
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error('Erro ao carregar projetos');
-      }
-      
-      const result: ApiResponse<Project[]> = await response.json();
-      return result.data;
-    } catch (error) {
-      console.error('Erro ao buscar projetos:', error);
-      throw error;
-    }
+    return category ? projects.filter(p => p.category === category) : projects
   },
 
-  // GET project by ID
   async getById(id: number): Promise<Project> {
-    try {
-      const response = await fetch(`${API_URL}/projects/${id}`);
-      
-      if (!response.ok) {
-        throw new Error('Projeto não encontrado');
-      }
-      
-      const result: ApiResponse<Project> = await response.json();
-      return result.data;
-    } catch (error) {
-      console.error('Erro ao buscar projeto:', error);
-      throw error;
-    }
+    const project = projects.find(p => p.id === id)
+    if (!project) throw new Error('Projeto não encontrado')
+    return project
   }
 };
-
-
